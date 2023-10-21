@@ -23,6 +23,12 @@ Route::resource('/pendaftaran', PendaftaranController::class);
 
 Route::resource('/member', MemberController::class);
 
+// test
+
+Route::get('/dashboard', function () {
+    return view('admin.home-admin');
+});
+
 Route::get('/dashboard', function () {
     return view('admin.home-admin');
 });
