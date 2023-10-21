@@ -28,6 +28,7 @@ Route::get('/dashboard', function () {
     return view('admin.home-admin');
 });
 
+
 Route::get('/ssss', function () {
     return view('admin.home-admin');
 });
