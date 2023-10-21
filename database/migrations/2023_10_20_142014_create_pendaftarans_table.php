@@ -19,6 +19,7 @@ return new class extends Migration
             $table->string('alamat');
             $table->string('sekolah');
             $table->integer('wa_ortu');
+            $table->integer('bukti_pembayaran');
             $table->timestamps();
         });
     }

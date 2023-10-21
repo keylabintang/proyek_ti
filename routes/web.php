@@ -20,11 +20,11 @@ use App\Http\Controllers\PendaftaranController;
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
 
-Route::resource('/pendaftaran', PendaftaranController::class);
+Route::resource('/admin/pendaftaran', PendaftaranController::class);
 
-Route::resource('/member', MemberController::class);
+Route::resource('/admin/member', MemberController::class);
 
-Route::get('/dashboard', function () {
+Route::get('/admin', function () {
     return view('admin.home-admin');
 });
 
