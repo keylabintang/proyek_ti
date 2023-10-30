@@ -80,7 +80,12 @@ class MemberController extends Controller
      */
     public function edit(Member $member)
     {
-        //
+        $judul = "Edit Member";
+
+        // $data = Member::orderBy('id', 'asc')->get();
+        // $member = Member::where('id', $id)->first();
+
+        return view('admin/member/edit', compact('member', 'judul'));
     }
 
     /**
@@ -88,7 +93,37 @@ class MemberController extends Controller
      */
     public function update(Request $request, Member $member)
     {
-        //
+        $request->validate([
+            'nama' => 'required',
+            'tempat_lahir' => 'required',
+            'tanggal_lahir' => 'required',
+            'alamat' => 'required',
+            'sekolah' => 'required',
+            'wa_ortu' => 'required|numeric',
+        ], [
+            'nama.required' => 'Nama wajib diisi',
+            'tempat_lahir.required' => 'tempat_lahir wajib diisi',
+            'tanggal_lahir.required' => 'tanggal_lahir wajib diisi',
+            'alamat.required' => 'alamat wajib diisi',
+            'sekolah.required' => 'sekolah wajib diisi',
+            'wa_ortu.required' => 'Nomor Orang Tua wajib diisi',
+            'wa_ortu.numeric' => 'Nomor Orang Tua wajib diisi dengan angka',
+        ]);
+
+
+        $data = [
+            'nama' => $request->input('nama'),
+            'tempat_lahir' => $request->input('tempat_lahir'),
+            'tanggal_lahir' => $request->input('tanggal_lahir'),
+            'alamat' => $request->input('alamat'),
+            'sekolah' => $request->input('sekolah'),
+            'wa_ortu' => $request->input('wa_ortu'),
+        ];
+
+        $member->update($data);
+
+        // Alert::success('Data Prodi', 'Berhasil diubah!');
+        return redirect('/admin/member');
     }
 
     /**
@@ -96,6 +131,8 @@ class MemberController extends Controller
      */
     public function destroy(Member $member)
     {
-        //
+        $member->delete();
+        // Alert::success('Data Prodi', 'Berhasil dihapus!!');
+        return redirect('/admin/member');
     }
 }

@@ -5,7 +5,7 @@
         <nav aria-label="breadcrumb" class="d-flex justify-content-end px-2">
             <ol class="breadcrumb breadcrumb-style1">
                 <li class="breadcrumb-item">
-                    <span class="text-muted fw-light">Prodi</span>
+                    <span class="text-muted fw-light">Member</span>
                 </li>
                 <li class="breadcrumb-item active">Tambah</li>
             </ol>
@@ -106,10 +106,10 @@
                     <div class="row justify-content-end mt-4">
                         <div class="col-sm-10">
                             <a href="/admin/member">
-                                <button type="button" class="btn btn-sm btn-secondary px-3">Back
+                                <button type="button" class="btn btn-sm btn-secondary px-3">Kembali
                                 </button>
                             </a>
-                            <button type="submit" class="btn btn-sm btn-primary px-3">Save</button>
+                            <button type="submit" class="btn btn-sm btn-primary px-3">Simpan</button>
                         </div>
                     </div>
                 </form>

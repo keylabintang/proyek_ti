@@ -41,12 +41,12 @@
                                         <i class="bx bx-dots-vertical-rounded"></i>
                                     </button>
                                     <div class="dropdown-menu">
-                                        <a class="dropdown-item" href="{{ route('admin.member.edit', $dt->id) }}">
+                                        <a class="dropdown-item" href="{{ route('member.edit', $dt->id) }}">
                                             <i class="bx bx-edit-alt me-1"></i>
                                             Edit
                                         </a>
 
-                                        <form action="{{ route('admin.member.destroy', $dt->id) }}" method="POST">
+                                        <form action="{{ route('member.destroy', $dt->id) }}" method="POST">
                                             @csrf
                                             @method('DELETE')
                                             <button type="submit" class="dropdown-item"
