@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Pelatih;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\File;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class PelatihController extends Controller
 {
@@ -12,7 +14,14 @@ class PelatihController extends Controller
      */
     public function index()
     {
-        //
+        $pelatih = Pelatih::oldest()->get();
+        return view(
+            'admin.pelatih.index',
+            [
+                'data' => $pelatih,
+                'judul' => 'Daftar Pelatih'
+            ]
+        );
     }
 
     /**
@@ -20,7 +29,12 @@ class PelatihController extends Controller
      */
     public function create()
     {
-        //
+        return view(
+            'admin.pelatih.create',
+            [
+                'judul' => 'Tambah Pelatih'
+            ]
+        );
     }
 
     /**
@@ -28,7 +42,41 @@ class PelatihController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate(
+            [
+                'nama' => 'required',
+                'nama_panggilan' => 'required',
+                'no_wa' => 'required|numeric',
+                'ig' => 'required',
+                'keterangan' => 'required',
+                'foto' => 'required',
+                'foto.*' => 'image|mimes:jpeg,png,jpg,gif,svg,webp'
+            ],
+            [
+                'nama.required' => 'Nama harus diisi',
+                'nama_panggilan.required' => 'Nama panggilan harus diisi',
+                'no_wa.required' => 'Nomor whatsapp harus diisi',
+                'no_wa.numeric' => 'Nomor whatsapp harus diisi dengan angka',
+                'ig.required' => 'Akun instagram harus diisi',
+                'keterangan.required' => 'Keterangan pelatih harus diisi',
+                'foto.required' => 'Foto harus diisi',
+                'foto.image' => 'File foto harus diisi dengan file jpeg, png, jpg, gif, svg, webp',
+            ]
+        );
+
+        $input = $request->all();
+
+        if ($image = $request->file("foto")) {
+            $destinationPath = "images/";
+            $profileImage = date("YmdHis") . "." . $image->getClientOriginalExtension();
+            $image->move($destinationPath, $profileImage);
+            $input["foto"] = "$profileImage";
+        }
+
+        Pelatih::create($input);
+
+        Alert::success('Data Pelatih', 'Berhasil Ditambahkan!');
+        return redirect('/admin/pelatih');
     }
 
     /**
@@ -44,7 +92,13 @@ class PelatihController extends Controller
      */
     public function edit(Pelatih $pelatih)
     {
-        //
+        return view(
+            'admin.pelatih.edit',
+            [
+                'judul' => 'Edit Pelatih',
+                'data' => $pelatih
+            ]
+        );
     }
 
     /**
@@ -52,7 +106,41 @@ class PelatihController extends Controller
      */
     public function update(Request $request, Pelatih $pelatih)
     {
-        //
+        $request->validate(
+            [
+                'nama' => 'required',
+                'nama_panggilan' => 'required',
+                'no_wa' => 'required|numeric',
+                'ig' => 'required',
+                'keterangan' => 'required',
+                'foto.*' => 'image|mimes:jpeg,png,jpg,gif,svg,webp'
+            ],
+            [
+                'nama.required' => 'Nama harus diisi',
+                'nama_panggilan.required' => 'Nama panggilan harus diisi',
+                'no_wa.required' => 'Nomor whatsapp harus diisi',
+                'no_wa.numeric' => 'Nomor whatsapp harus diisi dengan angka',
+                'ig.required' => 'Akun instagram harus diisi',
+                'keterangan.required' => 'Keterangan pelatih harus diisi',
+                'foto.image' => 'File foto harus diisi dengan file jpeg, png, jpg, gif, svg, webp',
+            ]
+        );
+
+        $input = $request->all();
+
+        if ($image = $request->file("foto")) {
+            $destinationPath = "images/";
+            $profileImage = date("YmdHis") . "." . $image->getClientOriginalExtension();
+            $image->move($destinationPath, $profileImage);
+            $input["foto"] = "$profileImage";
+        } else {
+            unset($input["foto"]);
+        }
+
+        $pelatih->update($input);
+
+        Alert::success('Data Pelatih', 'Berhasil Diubah!');
+        return redirect('/admin/pelatih');
     }
 
     /**
@@ -60,6 +148,10 @@ class PelatihController extends Controller
      */
     public function destroy(Pelatih $pelatih)
     {
-        //
+        File::delete('images/' . $pelatih->foto);
+        $pelatih->delete();
+
+        Alert::success('Data Pelatih', 'Berhasil dihapus!');
+        return redirect('/admin/pelatih');
     }
 }

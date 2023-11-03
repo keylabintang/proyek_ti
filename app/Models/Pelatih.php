@@ -9,12 +9,9 @@ class Pelatih extends Model
 {
     use HasFactory;
 
-    protected $table = "pelatihs";
+    protected $table = "pelatih";
 
-    protected $fillable = [
-        'nama',
-        'nama_lengkap',
-        'no_wa',
-        'foto',
-    ];
+    protected $primaryKey = 'id_pelatih';
+
+    protected $guarded = [];
 }

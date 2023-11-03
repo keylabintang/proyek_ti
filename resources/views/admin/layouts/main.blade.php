@@ -3,6 +3,7 @@
 <html lang="en" class="light-style layout-menu-fixed layout-compact" dir="ltr" data-theme="theme-default" data-assets-path="{{ asset('assets_admin/') }}" data-template="vertical-menu-template-free">
   <head>
     <meta charset="utf-8" />
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0" />
 
     <title>Cirebon Inline Skate</title>
@@ -35,14 +36,12 @@
     <script src="{{ asset('assets_admin/js/config.js') }}"></script>
 
     <!-- Data Table -->
-    {{-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.0/css/bootstrap.min.css" />  --}}
-    {{-- <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/dataTables.bootstrap5.min.css" /> --}}
-    {{-- <script defer src="https://code.jquery.com/jquery-3.7.0.js"></script> --}}
     <link rel="stylesheet" href="{{ asset('assets_admin/css/custom.css') }}" />
     <link rel="stylesheet" href="{{ asset('assets_admin/css/datatables-bootstrap5.css') }}" />
     <script defer src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
     <script defer src="https://cdn.datatables.net/1.13.6/js/dataTables.bootstrap5.min.js"></script>
     <script defer src="{{ asset('assets_admin/js/datatables.js') }}"></script>
+    
   </head>
 
   <body>
