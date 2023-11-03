@@ -1,12 +1,19 @@
 <?php
 
+use App\Http\Controllers\BannerController;
+use App\Http\Controllers\BiayaController;
+use App\Http\Controllers\EventController;
+use App\Http\Controllers\FAQController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\JadwalController;
+use App\Http\Controllers\KontakController;
 use App\Http\Controllers\MemberController;
 use App\Http\Controllers\PelatihController;
 use App\Http\Controllers\PendaftaranController;
-
-
+use App\Http\Controllers\PrestasiController;
+use App\Http\Controllers\ProgramController;
+use App\Http\Controllers\TentangController;
 
 /*
 |--------------------------------------------------------------------------
@@ -26,6 +33,24 @@ Route::resource('/pendaftaran', PendaftaranController::class);
 Route::resource('/admin/member', MemberController::class);
 
 Route::resource('/admin/pelatih', PelatihController::class);
+
+Route::resource('/admin/jadwal', JadwalController::class);
+
+Route::resource('/admin/program', ProgramController::class);
+
+Route::resource('/admin/event', EventController::class);
+
+Route::resource('/admin/biaya', BiayaController::class);
+
+Route::resource('/admin/banner', BannerController::class);
+
+Route::resource('/admin/tentang', TentangController::class);
+
+Route::resource('/admin/prestasi', PrestasiController::class);
+
+Route::resource('/admin/FAQ', FAQController::class);
+
+Route::resource('/admin/kontak', KontakController::class);
 
 Route::get('/admin/dashboard', function () {
     return view('admin.home-admin');
