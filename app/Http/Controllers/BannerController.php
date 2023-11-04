@@ -2,7 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Banner;
 use Illuminate\Http\Request;
+use RealRashid\SweetAlert\Facades\Alert;
+
 
 class BannerController extends Controller
 {
@@ -11,7 +14,14 @@ class BannerController extends Controller
      */
     public function index()
     {
-        //
+        $banner = Banner::oldest()->get();
+        return view(
+            'admin.main-banner.index',
+            [
+                'data' => $banner,
+                'judul' => 'Daftar Main Banner'
+            ]
+        );
     }
 
     /**
@@ -41,17 +51,43 @@ class BannerController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(Banner $banner)
     {
-        //
+        return view(
+            'admin.main-banner.edit',
+            [
+                'judul' => 'Edit Main Banner',
+                'data' => $banner
+            ]
+        );
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, Banner $banner)
     {
-        //
+        $request->validate(
+            [
+                'span' => 'required',
+                'header' => 'required',
+                'paragraf' => 'required',
+                'tombol' => 'required',
+                'link' => 'required',
+            ],
+            [
+                'span.required' => 'Span harus diisi',
+                'header.required' => 'Header harus diisi',
+                'paragraf.required' => 'Paragraf harus diisi',
+                'tombol.required' => 'Tombol harus diisi',
+                'link.required' => 'Link harus diisi',
+            ]
+        );
+
+        $banner->update($request->all());
+
+        Alert::success('Data Main Banner', 'Berhasil Diubah!');
+        return redirect('/admin/banner');
     }
 
     /**
