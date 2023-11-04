@@ -3,7 +3,7 @@
 use App\Http\Controllers\BannerController;
 use App\Http\Controllers\BiayaController;
 use App\Http\Controllers\EventController;
-use App\Http\Controllers\FAQController;
+use App\Http\Controllers\FaqController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\JadwalController;
@@ -52,6 +52,6 @@ Route::resource('/admin/tentang', TentangController::class);
 
 Route::resource('/admin/prestasi', PrestasiController::class);
 
-Route::resource('/admin/FAQ', FAQController::class);
+Route::resource('/admin/faq', FaqController::class);
 
 Route::resource('/admin/kontak', KontakController::class);

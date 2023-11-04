@@ -2,16 +2,26 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Faq;
 use Illuminate\Http\Request;
+use RealRashid\SweetAlert\Facades\Alert;
 
-class FAQController extends Controller
+
+class FaqController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        //
+        $faq = Faq::oldest()->get();
+        return view(
+            'admin.faq.index',
+            [
+                'data' => $faq,
+                'judul' => 'Daftar FAQ'
+            ]
+        );
     }
 
     /**
@@ -19,7 +29,12 @@ class FAQController extends Controller
      */
     public function create()
     {
-        //
+        return view(
+            'admin.faq.create',
+            [
+                'judul' => 'Tambah FAQ'
+            ]
+        );
     }
 
     /**
@@ -27,7 +42,21 @@ class FAQController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate(
+            [
+                'pertanyaan' => 'required',
+                'keterangan' => 'required',
+            ],
+            [
+                'pertanyaan.required' => 'Pertanyaan harus diisi',
+                'keterangan.required' => 'Keterangan harus diisi',
+            ]
+        );
+
+        Faq::create($request->all());
+
+        Alert::success('Data FAQ', 'Berhasil Ditambahkan!');
+        return redirect('/admin/faq');
     }
 
     /**
@@ -41,24 +70,47 @@ class FAQController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(Faq $faq)
     {
-        //
+        return view(
+            'admin.faq.edit',
+            [
+                'judul' => 'Edit FAQ',
+                'data' => $faq
+            ]
+        );
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, Faq $faq)
     {
-        //
+        $request->validate(
+            [
+                'pertanyaan' => 'required',
+                'keterangan' => 'required',
+            ],
+            [
+                'pertanyaan.required' => 'Pertanyaan harus diisi',
+                'keterangan.required' => 'Keterangan harus diisi',
+            ]
+        );
+
+        $faq->update($request->all());
+
+        Alert::success('Data FAQ', 'Berhasil Diubah!');
+        return redirect('/admin/faq');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Faq $faq)
     {
-        //
+        $faq->delete();
+
+        Alert::success('Data FAQ', 'Berhasil dihapus!');
+        return redirect('/admin/faq');
     }
 }

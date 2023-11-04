@@ -223,19 +223,19 @@
         </li>
 
         <!-- FAQ -->
-        <li class="menu-item {{ Request::is('admin/FAQ*') ? 'active open' : '' }}">
+        <li class="menu-item {{ Request::is('admin/faq*') ? 'active open' : '' }}">
             <a href="javascript:void(0)" class="menu-link menu-toggle">
                 <i class="menu-icon tf-icons bx bx-box"></i>
                 <div data-i18n="FAQ">FAQ</div>
             </a>
             <ul class="menu-sub">
-                <li class="menu-item {{ Request::is('admin/FAQ') ? 'active' : '' }}">
-                    <a href="/admin/FAQ" class="menu-link">
+                <li class="menu-item {{ Request::is('admin/faq') ? 'active' : '' }}">
+                    <a href="/admin/faq" class="menu-link">
                         <div data-i18n="Daftar">Daftar</div>
                     </a>
                 </li>
-                <li class="menu-item {{ Request::is('admin/FAQ/create') ? 'active' : '' }}">
-                    <a href="{{ route('FAQ.create') }}" class="menu-link">
+                <li class="menu-item {{ Request::is('admin/faq/create') ? 'active' : '' }}">
+                    <a href="{{ route('faq.create') }}" class="menu-link">
                         <div data-i18n="Tambah">Tambah</div>
                     </a>
                 </li>
@@ -243,7 +243,7 @@
         </li>
 
         <!-- Kontak Kami -->
-        <li class="menu-item {{ Request::is('admin/kontak*') ? 'active open' : '' }}">
+        <li class="menu-item mb-5 {{ Request::is('admin/kontak*') ? 'active open' : '' }}">
             <a href="javascript:void(0)" class="menu-link menu-toggle">
                 <i class="menu-icon tf-icons bx bx-box"></i>
                 <div data-i18n="Kontak Kami">Kontak Kami</div>
