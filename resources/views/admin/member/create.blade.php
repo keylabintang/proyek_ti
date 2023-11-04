@@ -21,10 +21,10 @@
                     @csrf
                     <div class="row mb-3">
                         <label class="col-sm-2 col-form-label" for="nama">Nama</label>
-                        <div class="col-sm-2">
+                        <div class="col-sm-4">
                             <div class="input-group">
                                 <input type="text" class="form-control @error('nama') border-danger @enderror"
-                                    id="nama" name="nama" value="{{ old('nama') }}" />
+                                    id="nama" name="nama" value="{{ old('nama') }}" placeholder="Masukkan Nama" />
                             </div>
                             @error('nama')
                                 <div class="form-text text-danger">
@@ -38,7 +38,8 @@
                         <div class="col-sm-4">
                             <div class="input-group">
                                 <input type="text" class="form-control @error('tempat_lahir') border-danger @enderror"
-                                    id="tempat_lahir" name="tempat_lahir" value="{{ old('tempat_lahir') }}" />
+                                    id="tempat_lahir" name="tempat_lahir" value="{{ old('tempat_lahir') }}"
+                                    placeholder="Masukkan Tempat Lahir" />
                             </div>
                             @error('tempat_lahir')
                                 <div class="form-text text-danger">
@@ -66,7 +67,8 @@
                         <div class="col-sm-4">
                             <div class="input-group">
                                 <input type="text" class="form-control @error('alamat') border-danger @enderror"
-                                    id="alamat" name="alamat" value="{{ old('alamat') }}" />
+                                    id="alamat" name="alamat" value="{{ old('alamat') }}"
+                                    placeholder="Masukkan Alamat" />
                             </div>
                             @error('alamat')
                                 <div class="form-text text-danger">
@@ -80,7 +82,8 @@
                         <div class="col-sm-4">
                             <div class="input-group">
                                 <input type="text" class="form-control @error('sekolah') border-danger @enderror"
-                                    id="sekolah" name="sekolah" value="{{ old('sekolah') }}" />
+                                    id="sekolah" name="sekolah" value="{{ old('sekolah') }}"
+                                    placeholder="Masukkan Sekolah" />
                             </div>
                             @error('sekolah')
                                 <div class="form-text text-danger">
@@ -94,9 +97,46 @@
                         <div class="col-sm-4">
                             <div class="input-group">
                                 <input type="number" class="form-control @error('wa_ortu') border-danger @enderror"
-                                    id="wa_ortu" name="wa_ortu" value="{{ old('wa_ortu') }}" />
+                                    id="wa_ortu" name="wa_ortu" value="{{ old('wa_ortu') }}"
+                                    placeholder="Masukkan Nomor Ortu" />
                             </div>
                             @error('wa_ortu')
+                                <div class="form-text text-danger">
+                                    *{{ $message }}
+                                </div>
+                            @enderror
+                        </div>
+                    </div>
+                    <div class="row mb-3">
+                        <label class="col-sm-2 col-form-label" for="umur">Umur</label>
+                        <div class="col-sm-4">
+                            <div class="input-group">
+                                <input type="number" class="form-control @error('umur') border-danger @enderror"
+                                    id="umur" name="umur" value="{{ old('umur') }}"
+                                    placeholder="Masukkan Umur" />
+                            </div>
+                            @error('umur')
+                                <div class="form-text text-danger">
+                                    *{{ $message }}
+                                </div>
+                            @enderror
+                        </div>
+                    </div>
+                    <div class="row mb-3">
+                        <label for="level" class="col-sm-2 col-form-label">Level</label>
+                        <div class="col-sm-4">
+                            <div class="input-group">
+                                <input class="form-control @error('level') border-danger @enderror" list="datalistOptions"
+                                    id="level" name="level" value="{{ old('level') }}"
+                                    placeholder="Pilih Level" />
+                                <datalist id="datalistOptions">
+                                    <option value="Warrior"></option>
+                                    <option value="Elite"></option>
+                                    <option value="Speed"></option>
+                                    <option value="Freestyle"></option>
+                                </datalist>
+                            </div>
+                            @error('level')
                                 <div class="form-text text-danger">
                                     *{{ $message }}
                                 </div>

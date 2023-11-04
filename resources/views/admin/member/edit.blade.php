@@ -103,9 +103,45 @@
                             @enderror
                         </div>
                     </div>
+                    <div class="row mb-3">
+                        <label class="col-sm-2 col-form-label" for="umur">Umur</label>
+                        <div class="col-sm-4">
+                            <div class="input-group">
+                                <input type="number" class="form-control @error('umur') border-danger @enderror"
+                                    id="umur" name="umur" value="{{ $member->umur }}"
+                                    placeholder="Masukkan Umur" />
+                            </div>
+                            @error('umur')
+                                <div class="form-text text-danger">
+                                    *{{ $message }}
+                                </div>
+                            @enderror
+                        </div>
+                    </div>
+                    <div class="row mb-3">
+                        <label for="level" class="col-sm-2 col-form-label">Level</label>
+                        <div class="col-sm-4">
+                            <div class="input-group">
+                                <input class="form-control @error('level') border-danger @enderror" list="datalistOptions"
+                                    id="level" name="level" value="{{ $member->level }}"
+                                    placeholder="Pilih Level" />
+                                <datalist id="datalistOptions">
+                                    <option value="Warrior"></option>
+                                    <option value="Elite"></option>
+                                    <option value="Speed"></option>
+                                    <option value="Freestyle"></option>
+                                </datalist>
+                            </div>
+                            @error('level')
+                                <div class="form-text text-danger">
+                                    *{{ $message }}
+                                </div>
+                            @enderror
+                        </div>
+                    </div>
                     <div class="row justify-content-end mt-4">
                         <div class="col-sm-10">
-                            <a href="/prodi">
+                            <a href="/admin/member">
                                 <button type="button" class="btn btn-sm btn-secondary px-3">Kembali
                                 </button>
                             </a>

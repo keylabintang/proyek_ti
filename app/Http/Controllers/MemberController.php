@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Member;
 use Illuminate\Http\Request;
+use Carbon\Carbon;
 
 class MemberController extends Controller
 {
@@ -42,6 +43,8 @@ class MemberController extends Controller
             'alamat' => 'required',
             'sekolah' => 'required',
             'wa_ortu' => 'required|numeric',
+            'umur' => 'required|numeric',
+            'level' => 'required',
         ], [
             'nama.required' => 'Nama wajib diisi',
             'tempat_lahir.required' => 'tempat_lahir wajib diisi',
@@ -50,6 +53,9 @@ class MemberController extends Controller
             'sekolah.required' => 'sekolah wajib diisi',
             'wa_ortu.required' => 'Nomor Orang Tua wajib diisi',
             'wa_ortu.numeric' => 'Nomor Orang Tua wajib diisi dengan angka',
+            'umur.required' => 'umur wajib diisi',
+            'umur.numeric' => 'umur wajib diisi dengan angka',
+            'level.required' => 'level wajib diisi',
         ]);
 
 
@@ -60,6 +66,8 @@ class MemberController extends Controller
             'alamat' => $request->input('alamat'),
             'sekolah' => $request->input('sekolah'),
             'wa_ortu' => $request->input('wa_ortu'),
+            'umur' => $request->input('umur'),
+            'level' => $request->input('level'),
         ];
 
         Member::create($data);
@@ -82,9 +90,6 @@ class MemberController extends Controller
     {
         $judul = "Edit Member";
 
-        // $data = Member::orderBy('id', 'asc')->get();
-        // $member = Member::where('id', $id)->first();
-
         return view('admin/member/edit', compact('member', 'judul'));
     }
 
@@ -100,6 +105,8 @@ class MemberController extends Controller
             'alamat' => 'required',
             'sekolah' => 'required',
             'wa_ortu' => 'required|numeric',
+            'umur' => 'required|numeric',
+            'level' => 'required',
         ], [
             'nama.required' => 'Nama wajib diisi',
             'tempat_lahir.required' => 'tempat_lahir wajib diisi',
@@ -108,6 +115,9 @@ class MemberController extends Controller
             'sekolah.required' => 'sekolah wajib diisi',
             'wa_ortu.required' => 'Nomor Orang Tua wajib diisi',
             'wa_ortu.numeric' => 'Nomor Orang Tua wajib diisi dengan angka',
+            'umur.required' => 'umur wajib diisi',
+            'umur.numeric' => 'umur wajib diisi dengan angka',
+            'level.required' => 'level wajib diisi',
         ]);
 
 
@@ -118,6 +128,8 @@ class MemberController extends Controller
             'alamat' => $request->input('alamat'),
             'sekolah' => $request->input('sekolah'),
             'wa_ortu' => $request->input('wa_ortu'),
+            'umur' => $request->input('umur'),
+            'level' => $request->input('level'),
         ];
 
         $member->update($data);
@@ -132,7 +144,7 @@ class MemberController extends Controller
     public function destroy(Member $member)
     {
         $member->delete();
-        // Alert::success('Data Prodi', 'Berhasil dihapus!!');
+        // Alert::success('Data Member', 'Berhasil dihapus!!');
         return redirect('/admin/member');
     }
 }

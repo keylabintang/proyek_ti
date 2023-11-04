@@ -28,7 +28,7 @@ use App\Http\Controllers\TentangController;
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
 
-Route::get('/admin/dashboard', function () {
+Route::get('/admin', function () {
     return view('admin.home-admin');
 });
 

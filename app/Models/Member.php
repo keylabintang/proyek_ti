@@ -9,7 +9,7 @@ class Member extends Model
 {
     use HasFactory;
 
-    protected $table = "members";
+    protected $table = "member";
 
     protected $fillable = [
         'nama',
@@ -18,5 +18,7 @@ class Member extends Model
         'alamat',
         'sekolah',
         'wa_ortu',
+        'umur',
+        'level',
     ];
 }

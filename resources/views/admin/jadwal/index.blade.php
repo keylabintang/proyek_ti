@@ -17,13 +17,10 @@
                 <thead>
                     <tr>
                         <th>No.</th>
-                        <th>Nama</th>
-                        <th>Tempat Tanggal Lahir </th>
-                        <th>Alamat</th>
-                        <th>Sekolah</th>
-                        <th>Nomor Ortu</th>
-                        <th>Umur</th>
-                        <th>Level</th>
+                        <th>Tanggal</th>
+                        <th>Hari</th>
+                        <th>Waktu</th>
+                        <th>Tempat</th>
                         <th>Action</th>
                     </tr>
                 </thead>
@@ -31,14 +28,10 @@
                     @foreach ($data as $dt)
                         <tr>
                             <td>{{ $loop->index + 1 }}. </td>
-                            <td>{{ $dt->nama }}</td>
-                            <td>{{ $dt->tempat_lahir }}, {{ \Carbon\Carbon::parse($dt->tanggal_lahir)->format('d-m-Y') }}
-                            </td>
-                            <td>{{ $dt->alamat }}</td>
-                            <td>{{ $dt->sekolah }}</td>
-                            <td>{{ $dt->wa_ortu }}</td>
-                            <td>{{ $dt->umur }}</td>
-                            <td>{{ $dt->level }}</td>
+                            <td>{{ \Carbon\Carbon::parse($dt->tanggal)->format('d-m-Y') }}</td>
+                            <td>{{ $dt->hari }}</td>
+                            <td>{{ $dt->waktu }}</td>
+                            <td>{{ $dt->tempat }}</td>
                             <td>
                                 <div class="dropdown">
                                     <button type="button" class="btn p-0 dropdown-toggle hide-arrow"
@@ -46,12 +39,12 @@
                                         <i class="bx bx-dots-vertical-rounded"></i>
                                     </button>
                                     <div class="dropdown-menu">
-                                        <a class="dropdown-item" href="{{ route('member.edit', $dt->id) }}">
+                                        <a class="dropdown-item" href="{{ route('jadwal.edit', $dt->id) }}">
                                             <i class="bx bx-edit-alt me-1"></i>
                                             Edit
                                         </a>
 
-                                        <form action="{{ route('member.destroy', $dt->id) }}" method="POST">
+                                        <form action="{{ route('jadwal.destroy', $dt->id) }}" method="POST">
                                             @csrf
                                             @method('DELETE')
                                             <button type="submit" class="dropdown-item"
