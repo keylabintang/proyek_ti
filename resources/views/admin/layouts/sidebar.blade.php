@@ -1,6 +1,6 @@
 <aside id="layout-menu" class="layout-menu menu-vertical menu bg-menu-theme">
     <div class="app-brand demo">
-        <a href="index.html" class="app-brand-link">
+        <a href="/admin" class="app-brand-link">
             <img src="{{ asset('assets_admin/img/logo/logo.png') }}" class="logo" alt="logo" />
         </a>
         <a href="javascript:void(0);" class="layout-menu-toggle menu-link text-large ms-auto d-block d-xl-none">
@@ -14,7 +14,7 @@
 
         <!-- Dashboard -->
         <li class="menu-item {{ Request::is('admin/dashboard*') ? 'active' : '' }}">
-            <a href="/admin/dashboard" class="menu-link">
+            <a href="/admin" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-home-circle"></i>
                 <div data-i18n="Analytics">Dashboard</div>
             </a>
