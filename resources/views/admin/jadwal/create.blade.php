@@ -5,9 +5,9 @@
         <nav aria-label="breadcrumb" class="d-flex justify-content-end px-2">
             <ol class="breadcrumb breadcrumb-style1">
                 <li class="breadcrumb-item">
-                    <span class="text-muted fw-light">Jadwal</span>
+                    <span class="text-muted fw-light">Tambah</span>
                 </li>
-                <li class="breadcrumb-item active">Tambah</li>
+                <li class="breadcrumb-item active">Jadwal</li>
             </ol>
         </nav>
         <div class="card mb-4">
@@ -49,7 +49,7 @@
                                     <option value="Minggu"></option>
                                 </datalist>
                             </div>
-                            @error('level')
+                            @error('hari')
                                 <div class="form-text text-danger">
                                     *{{ $message }}
                                 </div>

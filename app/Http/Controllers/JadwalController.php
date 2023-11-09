@@ -13,7 +13,7 @@ class JadwalController extends Controller
     public function index()
     {
         $judul = "Data Jadwal";
-        $data = Jadwal::orderBy('id', 'asc')->get();
+        $data = Jadwal::orderBy('id_jadwal', 'asc')->get();
         
         return view('admin.jadwal.index', compact('judul', 'data'));
     }
