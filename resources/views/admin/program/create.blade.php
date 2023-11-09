@@ -7,7 +7,7 @@
                 <li class="breadcrumb-item">
                     <span class="text-muted fw-light">Tambah</span>
                 </li>
-                <li class="breadcrumb-item active">Jadwal</li>
+                <li class="breadcrumb-item active">Program</li>
             </ol>
         </nav>
         <div class="card mb-4">
@@ -17,8 +17,23 @@
             </div>
             <div class="card-body">
                 {{-- <form action="{{ route('admin.member.store') }}" method="POST"> --}}
-                <form action="/admin/jadwal" method="POST">
+                <form action="/admin/program" method="POST">
                     @csrf
+                    <div class="row mb-3">
+                        <label class="col-sm-2 col-form-label" for="nama">Program</label>
+                        <div class="col-sm-4">
+                            <div class="input-group">
+                                <input type="text" class="form-control @error('tempat') border-danger @enderror"
+                                    id="nama" name="nama" value="{{ old('nama') }}"
+                                    placeholder="Masukkan Program" />
+                            </div>
+                            @error('nama')
+                                <div class="form-text text-danger">
+                                    *{{ $message }}
+                                </div>
+                            @enderror
+                        </div>
+                    </div>
                     <div class="row mb-3">
                         <label class="col-sm-2 col-form-label" for="tanggal">Tanggal</label>
                         <div class="col-sm-4">
@@ -75,11 +90,8 @@
                         <div class="col-sm-4">
                             <div class="input-group">
                                 <input type="text" class="form-control @error('tempat') border-danger @enderror"
-                                    list="datalistOptions" id="tempat" name="tempat" value="{{ old('tempat') }}"
+                                    id="tempat" name="tempat" value="{{ old('tempat') }}"
                                     placeholder="Masukkan Tempat" />
-                                <datalist id="datalistOptions">
-                                    <option value="Area Parkir Living Plaza"></option>
-                                </datalist>
                             </div>
                             @error('tempat')
                                 <div class="form-text text-danger">
@@ -90,7 +102,7 @@
                     </div>
                     <div class="row justify-content-end mt-4">
                         <div class="col-sm-10">
-                            <a href="/admin/jadwal">
+                            <a href="/admin/program">
                                 <button type="button" class="btn btn-sm btn-secondary px-3">Kembali
                                 </button>
                             </a>
