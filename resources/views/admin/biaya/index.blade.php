@@ -17,10 +17,9 @@
                 <thead>
                     <tr>
                         <th>No.</th>
+                        <th>Nama</th>
                         <th>Tanggal</th>
-                        <th>Hari</th>
-                        <th>Waktu</th>
-                        <th>Tempat</th>
+                        <th>Keterangan</th>
                         <th>Action</th>
                     </tr>
                 </thead>
@@ -28,10 +27,9 @@
                     @foreach ($data as $dt)
                         <tr>
                             <td>{{ $loop->index + 1 }}. </td>
+                            <td>{{ $dt->nama }}</td>
                             <td>{{ \Carbon\Carbon::parse($dt->tanggal)->format('d-m-Y') }}</td>
-                            <td>{{ $dt->hari }}</td>
-                            <td>{{ $dt->waktu }}</td>
-                            <td>{{ $dt->tempat }}</td>
+                            <td>{{ $dt->Keterangan }}</td>
                             <td>
                                 <div class="dropdown">
                                     <button type="button" class="btn p-0 dropdown-toggle hide-arrow"
@@ -39,12 +37,12 @@
                                         <i class="bx bx-dots-vertical-rounded"></i>
                                     </button>
                                     <div class="dropdown-menu">
-                                        <a class="dropdown-item" href="{{ route('jadwal.edit', $dt->id_jadwal) }}">
+                                        <a class="dropdown-item" href="{{ route('biaya.edit', $dt->id_biaya) }}">
                                             <i class="bx bx-edit-alt me-1"></i>
                                             Edit
                                         </a>
 
-                                        <form action="{{ route('jadwal.destroy', $dt->id_jadwal) }}" method="POST">
+                                        <form action="{{ route('biaya.destroy', $dt->id_biaya) }}" method="POST">
                                             @csrf
                                             @method('DELETE')
                                             <button type="submit" class="dropdown-item"
