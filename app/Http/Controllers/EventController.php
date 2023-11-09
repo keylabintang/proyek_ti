@@ -2,7 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Event;
 use Illuminate\Http\Request;
+use RealRashid\SweetAlert\Facades\Alert;
+use Illuminate\Support\Facades\File;
+
 
 class EventController extends Controller
 {
@@ -11,7 +15,14 @@ class EventController extends Controller
      */
     public function index()
     {
-        //
+        $event = Event::oldest()->get();
+        return view(
+            'admin.event.index',
+            [
+                'data' => $event,
+                'judul' => 'Daftar Event'
+            ]
+        );
     }
 
     /**
@@ -19,7 +30,12 @@ class EventController extends Controller
      */
     public function create()
     {
-        //
+        return view(
+            'admin.event.create',
+            [
+                'judul' => 'Tambah Event'
+            ]
+        );
     }
 
     /**
@@ -27,7 +43,38 @@ class EventController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate(
+            [
+                'nama' => 'required',
+                'keterangan' => 'required',
+                'timeline' => 'required',
+                'tempat' => 'required',
+                'poster' => 'required',
+                'poster.*' => 'image|mimes:jpeg,png,jpg,gif,svg,webp'
+            ],
+            [
+                'nama.required' => 'Nama harus diisi',
+                'keterangan.required' => 'Keterangan pelatih harus diisi',
+                'timeline.required' => 'Timeline harus diisi',
+                'tempat.required' => 'Tempat harus diisi',
+                'poster.required' => 'Poster harus diisi',
+                'poster.image' => 'File poster harus diisi dengan file jpeg, png, jpg, gif, svg, webp',
+            ]
+        );
+
+        $input = $request->all();
+
+        if ($image = $request->file("poster")) {
+            $destinationPath = "images/";
+            $profileImage = date("YmdHis") . "." . $image->getClientOriginalExtension();
+            $image->move($destinationPath, $profileImage);
+            $input["poster"] = "$profileImage";
+        }
+
+        Event::create($input);
+
+        Alert::success('Data Event', 'Berhasil Ditambahkan!');
+        return redirect('/admin/event');
     }
 
     /**
@@ -41,24 +88,65 @@ class EventController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(Event $event)
     {
-        //
+        return view(
+            'admin.event.edit',
+            [
+                'judul' => 'Edit Event',
+                'data' => $event
+            ]
+        );
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, Event $event)
     {
-        //
+        $request->validate(
+            [
+                'nama' => 'required',
+                'keterangan' => 'required',
+                'timeline' => 'required',
+                'tempat' => 'required',
+                'poster.*' => 'image|mimes:jpeg,png,jpg,gif,svg,webp'
+            ],
+            [
+                'nama.required' => 'Nama harus diisi',
+                'keterangan.required' => 'Keterangan pelatih harus diisi',
+                'timeline.required' => 'Timeline harus diisi',
+                'tempat.required' => 'Tempat harus diisi',
+                'poster.image' => 'File poster harus diisi dengan file jpeg, png, jpg, gif, svg, webp',
+            ]
+        );
+
+        $input = $request->all();
+
+        if ($image = $request->file("poster")) {
+            $destinationPath = "images/";
+            $profileImage = date("YmdHis") . "." . $image->getClientOriginalExtension();
+            $image->move($destinationPath, $profileImage);
+            $input["poster"] = "$profileImage";
+        } else {
+            unset($input["poster"]);
+        }
+
+        $event->update($input);
+
+        Alert::success('Data Event', 'Berhasil Diubah!');
+        return redirect('/admin/event');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Event $event)
     {
-        //
+        File::delete('images/' . $event->foto);
+        $event->delete();
+
+        Alert::success('Data Event', 'Berhasil dihapus!');
+        return redirect('/admin/event');
     }
 }

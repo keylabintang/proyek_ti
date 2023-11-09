@@ -28,6 +28,8 @@ use App\Http\Controllers\TentangController;
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
 
+// Admin
+
 Route::get('/admin', function () {
     return view('admin.home-admin');
 });
@@ -55,3 +57,9 @@ Route::resource('/admin/prestasi', PrestasiController::class);
 Route::resource('/admin/faq', FaqController::class);
 
 Route::resource('/admin/kontak', KontakController::class);
+
+
+// User
+Route::get('/user', function () {
+    return view('user.home-user');
+});
