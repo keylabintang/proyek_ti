@@ -17,6 +17,7 @@
                 <thead>
                     <tr>
                         <th>No.</th>
+                        <th>Program</th>
                         <th>Tanggal</th>
                         <th>Hari</th>
                         <th>Waktu</th>
@@ -28,10 +29,10 @@
                     @foreach ($data as $dt)
                         <tr>
                             <td>{{ $loop->index + 1 }}. </td>
+                            <td>{{ $dt->nama }}</td>
                             <td>{{ \Carbon\Carbon::parse($dt->tanggal)->format('d-m-Y') }}</td>
                             <td>{{ $dt->hari }}</td>
-                            <td>{{ Form::time('time',\Carbon\Carbon::parse($dt->waktu)->timezone('Europe/Brussels')->format('H.i'),['class' => 'form-control']) }}
-                            </td>
+                            <td>{{ \Carbon\Carbon::parse($dt->waktu)->format('h.i') }}</td>
                             <td>{{ $dt->tempat }}</td>
                             <td>
                                 <div class="dropdown">
@@ -40,12 +41,12 @@
                                         <i class="bx bx-dots-vertical-rounded"></i>
                                     </button>
                                     <div class="dropdown-menu">
-                                        <a class="dropdown-item" href="{{ route('jadwal.edit', $dt->id_jadwal) }}">
+                                        <a class="dropdown-item" href="{{ route('program.edit', $dt->id_program) }}">
                                             <i class="bx bx-edit-alt me-1"></i>
                                             Edit
                                         </a>
 
-                                        <form action="{{ route('jadwal.destroy', $dt->id_jadwal) }}" method="POST">
+                                        <form action="{{ route('program.destroy', $dt->id_program) }}" method="POST">
                                             @csrf
                                             @method('DELETE')
                                             <button type="submit" class="dropdown-item"

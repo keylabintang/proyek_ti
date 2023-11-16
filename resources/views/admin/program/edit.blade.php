@@ -5,7 +5,7 @@
         <nav aria-label="breadcrumb" class="d-flex justify-content-end px-2">
             <ol class="breadcrumb breadcrumb-style1">
                 <li class="breadcrumb-item">
-                    <span class="text-muted fw-light">Tambah</span>
+                    <span class="text-muted fw-light">Edit</span>
                 </li>
                 <li class="breadcrumb-item active">Jadwal</li>
             </ol>
@@ -16,15 +16,30 @@
                 {{-- <small class="text-muted">{{ $subJudul }}</small> --}}
             </div>
             <div class="card-body">
-                {{-- <form action="{{ route('admin.member.store') }}" method="POST"> --}}
-                <form action="/admin/jadwal" method="POST">
+                <form action="{{ route('program.update', $program->id) }}" method="POST">
                     @csrf
+                    @method('PUT')
+                    <div class="row mb-3">
+                        <label class="col-sm-2 col-form-label" for="nama">Program</label>
+                        <div class="col-sm-4">
+                            <div class="input-group">
+                                <input type="text" class="form-control @error('nama') border-danger @enderror"
+                                    id="nama" name="nama" value="{{ $program->nama }}"
+                                    placeholder="Masukkan Program" />
+                            </div>
+                            @error('nama')
+                                <div class="form-text text-danger">
+                                    *{{ $message }}
+                                </div>
+                            @enderror
+                        </div>
+                    </div>
                     <div class="row mb-3">
                         <label class="col-sm-2 col-form-label" for="tanggal">Tanggal</label>
                         <div class="col-sm-4">
                             <div class="input-group">
                                 <input type="date" class="form-control @error('tanggal') border-danger @enderror"
-                                    id="tanggal" name="tanggal" value="{{ old('tanggal') }}" />
+                                    id="tanggal" name="tanggal" value="{{ $program->tanggal }}" />
                             </div>
                             @error('tanggal')
                                 <div class="form-text text-danger">
@@ -38,7 +53,7 @@
                         <div class="col-sm-4">
                             <div class="input-group">
                                 <input class="form-control @error('hari') border-danger @enderror" list="datalistOptions"
-                                    id="hari" name="hari" value="{{ old('hari') }}" placeholder="Pilih Hari" />
+                                    id="hari" name="hari" value="{{ $program->hari }}" placeholder="Pilih Hari" />
                                 <datalist id="datalistOptions">
                                     <option value="Senin"></option>
                                     <option value="Selasa"></option>
@@ -61,7 +76,7 @@
                         <div class="col-sm-4">
                             <div class="input-group">
                                 <input type="time" class="form-control @error('waktu') border-danger @enderror"
-                                    id="timepicker" name="waktu" value="{{ old('waktu') }}" />
+                                    id="timepicker" name="waktu" value="{{ $program->waktu }}" />
                             </div>
                             @error('waktu')
                                 <div class="form-text text-danger">
@@ -75,11 +90,8 @@
                         <div class="col-sm-4">
                             <div class="input-group">
                                 <input type="text" class="form-control @error('tempat') border-danger @enderror"
-                                    list="datalistOptions" id="tempat" name="tempat" value="{{ old('tempat') }}"
+                                    id="tempat" name="tempat" value="{{ $program->tempat }}"
                                     placeholder="Masukkan Tempat" />
-                                <datalist id="datalistOptions">
-                                    <option value="Area Parkir Living Plaza"></option>
-                                </datalist>
                             </div>
                             @error('tempat')
                                 <div class="form-text text-danger">
@@ -90,11 +102,11 @@
                     </div>
                     <div class="row justify-content-end mt-4">
                         <div class="col-sm-10">
-                            <a href="/admin/jadwal">
+                            <a href="/admin/program">
                                 <button type="button" class="btn btn-sm btn-secondary px-3">Kembali
                                 </button>
                             </a>
-                            <button type="submit" class="btn btn-sm btn-primary px-3">Simpan</button>
+                            <button type="submit" class="btn btn-sm btn-primary px-3">Edit</button>
                         </div>
                     </div>
                 </form>
