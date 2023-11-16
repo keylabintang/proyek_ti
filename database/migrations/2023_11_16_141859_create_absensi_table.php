@@ -11,13 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('jadwal', function (Blueprint $table) {
-            $table->increments('id_jadwal');
+        Schema::create('absensi', function (Blueprint $table) {
+            $table->increments('id_absensi');
+            $table->string('nama');
             $table->date('tanggal');
-            $table->time('waktu');
-            $table->string('hari');
-            $table->string('tempat');
-            $table->integer('status')->default(0);
+            $table->enum('keterangan', ['hadir', 'tanpa keterangan', 'sakit', 'izin'])->default('tanpa keterangan');
             $table->timestamps();
         });
     }
@@ -27,6 +25,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('jadwal');
+        Schema::dropIfExists('absensi');
     }
 };

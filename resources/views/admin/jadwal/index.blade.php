@@ -30,7 +30,7 @@
                             <td>{{ $loop->index + 1 }}. </td>
                             <td>{{ \Carbon\Carbon::parse($dt->tanggal)->format('d-m-Y') }}</td>
                             <td>{{ $dt->hari }}</td>
-                            <td>{{ Form::time('time',\Carbon\Carbon::parse($dt->waktu)->timezone('Europe/Brussels')->format('H.i'),['class' => 'form-control']) }}
+                            <td>{{ \Carbon\Carbon::parse($dt->waktu)->format('H.i') }}
                             </td>
                             <td>{{ $dt->tempat }}</td>
                             <td>

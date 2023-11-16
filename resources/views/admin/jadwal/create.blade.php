@@ -75,9 +75,9 @@
                         <div class="col-sm-4">
                             <div class="input-group">
                                 <input type="text" class="form-control @error('tempat') border-danger @enderror"
-                                    list="datalistOptions" id="tempat" name="tempat" value="{{ old('tempat') }}"
+                                    list="datalistOption" id="tempat" name="tempat" value="{{ old('tempat') }}"
                                     placeholder="Masukkan Tempat" />
-                                <datalist id="datalistOptions">
+                                <datalist id="datalistOption">
                                     <option value="Area Parkir Living Plaza"></option>
                                 </datalist>
                             </div>

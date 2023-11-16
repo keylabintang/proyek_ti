@@ -14,6 +14,7 @@ use App\Http\Controllers\PendaftaranController;
 use App\Http\Controllers\PrestasiController;
 use App\Http\Controllers\ProgramController;
 use App\Http\Controllers\TentangController;
+use App\Http\Controllers\AbsensiController;
 
 /*
 |--------------------------------------------------------------------------
@@ -38,6 +39,8 @@ Route::resource('/pendaftaran', PendaftaranController::class);
 Route::resource('/admin/member', MemberController::class);
 
 Route::resource('/admin/pelatih', PelatihController::class);
+
+Route::resource('/admin/absensi', AbsensiController::class);
 
 Route::resource('/admin/jadwal', JadwalController::class);
 
