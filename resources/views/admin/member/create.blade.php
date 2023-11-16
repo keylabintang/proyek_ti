@@ -13,20 +13,18 @@
         <div class="card mb-4">
             <div class="card-header align-items-center">
                 <h5 class="mb-2">{{ $judul }}</h5>
-                {{-- <small class="text-muted">{{ $subJudul }}</small> --}}
             </div>
             <div class="card-body">
-                {{-- <form action="{{ route('admin.member.store') }}" method="POST"> --}}
-                <form action="/admin/member" method="POST">
+                <form action="{{ route('member.store') }}" method="POST">
                     @csrf
                     <div class="row mb-3">
-                        <label class="col-sm-2 col-form-label" for="nama">Nama</label>
-                        <div class="col-sm-4">
+                        <label class="col-sm-3 col-form-label" for="nama_anak">Nama Anak</label>
+                        <div class="col-sm-5">
                             <div class="input-group">
-                                <input type="text" class="form-control @error('nama') border-danger @enderror"
-                                    id="nama" name="nama" value="{{ old('nama') }}" placeholder="Masukkan Nama" />
+                                <input type="text" class="form-control @error('nama_anak') border-danger @enderror"
+                                    id="nama_anak" name="nama_anak" value="{{ old('nama_anak') }}" placeholder="Masukkan Nama Anak" />
                             </div>
-                            @error('nama')
+                            @error('nama_anak')
                                 <div class="form-text text-danger">
                                     *{{ $message }}
                                 </div>
@@ -34,14 +32,20 @@
                         </div>
                     </div>
                     <div class="row mb-3">
-                        <label class="col-sm-2 col-form-label" for="tempat_lahir">Tempat Lahir</label>
-                        <div class="col-sm-4">
-                            <div class="input-group">
-                                <input type="text" class="form-control @error('tempat_lahir') border-danger @enderror"
-                                    id="tempat_lahir" name="tempat_lahir" value="{{ old('tempat_lahir') }}"
-                                    placeholder="Masukkan Tempat Lahir" />
-                            </div>
-                            @error('tempat_lahir')
+                        <label class="col-sm-3 col-form-label" for="jenis_kelamin">Jenis Kelamin</label>
+                        <div class="col-sm-5">
+                            <select class="form-select @error('jenis_kelamin') border-danger @enderror" id="jenis_kelamin" name="jenis_kelamin">
+                                <option value="0" hidden disabled selected>Silahkan pilih </option>
+                                @if (old('jenis_kelamin') == "Laki-laki")
+                                <option value="Laki-laki" selected>Laki-laki</option>
+                                @elseif (old('jenis_kelamin') == "Perempuan")
+                                <option value="Perempuan" selected>Perempuan</option>
+                                @else
+                                <option value="Laki-laki">Laki-laki</option>
+                                <option value="Perempuan">Perempuan</option>
+                                @endif
+                            </select>
+                            @error('jenis_kelamin')
                                 <div class="form-text text-danger">
                                     *{{ $message }}
                                 </div>
@@ -49,8 +53,8 @@
                         </div>
                     </div>
                     <div class="row mb-3">
-                        <label class="col-sm-2 col-form-label" for="tanggal_lahir">Tanggal Lahir</label>
-                        <div class="col-sm-4">
+                        <label class="col-sm-3 col-form-label" for="tanggal_lahir">Tanggal Lahir</label>
+                        <div class="col-sm-5">
                             <div class="input-group">
                                 <input type="date" class="form-control @error('tanggal_lahir') border-danger @enderror"
                                     id="tanggal_lahir" name="tanggal_lahir" value="{{ old('tanggal_lahir') }}" />
@@ -63,14 +67,14 @@
                         </div>
                     </div>
                     <div class="row mb-3">
-                        <label class="col-sm-2 col-form-label" for="alamat">Alamat</label>
-                        <div class="col-sm-4">
+                        <label class="col-sm-3 col-form-label" for="ig_anak">Instagram Anak</label>
+                        <div class="col-sm-5">
                             <div class="input-group">
-                                <input type="text" class="form-control @error('alamat') border-danger @enderror"
-                                    id="alamat" name="alamat" value="{{ old('alamat') }}"
-                                    placeholder="Masukkan Alamat" />
+                                <input type="text" class="form-control @error('ig_anak') border-danger @enderror"
+                                    id="ig_anak" name="ig_anak" value="{{ old('ig_anak') }}"
+                                    placeholder="Contoh @instagram_anak" />
                             </div>
-                            @error('alamat')
+                            @error('ig_anak')
                                 <div class="form-text text-danger">
                                     *{{ $message }}
                                 </div>
@@ -78,14 +82,14 @@
                         </div>
                     </div>
                     <div class="row mb-3">
-                        <label class="col-sm-2 col-form-label" for="sekolah">Sekolah</label>
-                        <div class="col-sm-4">
+                        <label class="col-sm-3 col-form-label" for="nama_ortu">Nama Orang Tua</label>
+                        <div class="col-sm-5">
                             <div class="input-group">
-                                <input type="text" class="form-control @error('sekolah') border-danger @enderror"
-                                    id="sekolah" name="sekolah" value="{{ old('sekolah') }}"
-                                    placeholder="Masukkan Sekolah" />
+                                <input type="text" class="form-control @error('nama_ortu') border-danger @enderror"
+                                    id="nama_ortu" name="nama_ortu" value="{{ old('nama_ortu') }}"
+                                    placeholder="Masukkan Nama Orang Tua" />
                             </div>
-                            @error('sekolah')
+                            @error('nama_ortu')
                                 <div class="form-text text-danger">
                                     *{{ $message }}
                                 </div>
@@ -93,12 +97,12 @@
                         </div>
                     </div>
                     <div class="row mb-3">
-                        <label class="col-sm-2 col-form-label" for="wa_ortu">Nomor Ortu</label>
-                        <div class="col-sm-4">
+                        <label class="col-sm-3 col-form-label" for="wa_ortu">Nomor WA Orang Tua</label>
+                        <div class="col-sm-5">
                             <div class="input-group">
                                 <input type="number" class="form-control @error('wa_ortu') border-danger @enderror"
                                     id="wa_ortu" name="wa_ortu" value="{{ old('wa_ortu') }}"
-                                    placeholder="Masukkan Nomor Ortu" />
+                                    placeholder="Masukkan Nomor WA Orang Tua" />
                             </div>
                             @error('wa_ortu')
                                 <div class="form-text text-danger">
@@ -108,14 +112,14 @@
                         </div>
                     </div>
                     <div class="row mb-3">
-                        <label class="col-sm-2 col-form-label" for="umur">Umur</label>
-                        <div class="col-sm-4">
+                        <label class="col-sm-3 col-form-label" for="ig_ortu">Instagram Orang Tua</label>
+                        <div class="col-sm-5">
                             <div class="input-group">
-                                <input type="number" class="form-control @error('umur') border-danger @enderror"
-                                    id="umur" name="umur" value="{{ old('umur') }}"
-                                    placeholder="Masukkan Umur" />
+                                <input type="text" class="form-control @error('ig_ortu') border-danger @enderror"
+                                    id="ig_ortu" name="ig_ortu" value="{{ old('ig_ortu') }}"
+                                    placeholder="Masukkan Instagram Orang Tua" />
                             </div>
-                            @error('umur')
+                            @error('ig_ortu')
                                 <div class="form-text text-danger">
                                     *{{ $message }}
                                 </div>
@@ -123,19 +127,56 @@
                         </div>
                     </div>
                     <div class="row mb-3">
-                        <label for="level" class="col-sm-2 col-form-label">Level</label>
-                        <div class="col-sm-4">
+                        <label class="col-sm-3 col-form-label" for="alamat">Alamat</label>
+                        <div class="col-sm-5">
                             <div class="input-group">
-                                <input class="form-control @error('level') border-danger @enderror" list="datalistOptions"
-                                    id="level" name="level" value="{{ old('level') }}"
-                                    placeholder="Pilih Level" />
-                                <datalist id="datalistOptions">
-                                    <option value="Warrior"></option>
-                                    <option value="Elite"></option>
-                                    <option value="Speed"></option>
-                                    <option value="Freestyle"></option>
-                                </datalist>
+                                <textarea type="text" class="form-control @error('alamat') border-danger @enderror"
+                                    id="alamat" name="alamat"
+                                    placeholder="Masukkan Alamat">{{ old('alamat') }}</textarea>
                             </div>
+                            @error('alamat')
+                                <div class="form-text text-danger">
+                                    *{{ $message }}
+                                </div>
+                            @enderror
+                        </div>
+                    </div>
+                    <div class="row mb-3">
+                        <label class="col-sm-3 col-form-label" for="asal_sekolah">Asal Sekolah Anak</label>
+                        <div class="col-sm-5">
+                            <div class="input-group">
+                                <input type="text" class="form-control @error('asal_sekolah') border-danger @enderror"
+                                    id="asal_sekolah" name="asal_sekolah" value="{{ old('asal_sekolah') }}"
+                                    placeholder="Masukkan Sekolah Anak" />
+                            </div>
+                            @error('asal_sekolah')
+                                <div class="form-text text-danger">
+                                    *{{ $message }}
+                                </div>
+                            @enderror
+                        </div>
+                    </div>
+                    
+                    <div class="row mb-3">
+                        <label class="col-sm-3 col-form-label" for="level">Level</label>
+                        <div class="col-sm-5">
+                            <select class="form-select @error('level') border-danger @enderror" id="level" name="level">
+                                <option value="0" hidden disabled selected>Silahkan pilih </option>
+                                @if (old('level') == "Warior")
+                                <option value="Warior" selected>Warior</option>
+                                @elseif (old('level') == "Elite")
+                                <option value="Elite" selected>Elite</option>
+                                @elseif (old('level') == "Freestyle")
+                                <option value="Freestyle" selected>Freestyle</option>
+                                @elseif (old('level') == "Speed")
+                                <option value="Speed" selected>Speed</option>
+                                @else
+                                <option value="Warior">Warior</option>
+                                <option value="Elite">Elite</option>
+                                <option value="Freestyle">Freestyle</option>
+                                <option value="Speed">Speed</option>
+                                @endif
+                            </select>
                             @error('level')
                                 <div class="form-text text-danger">
                                     *{{ $message }}
@@ -144,7 +185,7 @@
                         </div>
                     </div>
                     <div class="row justify-content-end mt-4">
-                        <div class="col-sm-10">
+                        <div class="col-sm-12">
                             <a href="/admin/member">
                                 <button type="button" class="btn btn-sm btn-secondary px-3">Kembali
                                 </button>

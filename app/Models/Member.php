@@ -11,14 +11,7 @@ class Member extends Model
 
     protected $table = "member";
 
-    protected $fillable = [
-        'nama',
-        'tempat_lahir',
-        'tanggal_lahir',
-        'alamat',
-        'sekolah',
-        'wa_ortu',
-        'umur',
-        'level',
-    ];
+    protected $primaryKey = 'id_member';
+
+    protected $guarded = [];
 }
