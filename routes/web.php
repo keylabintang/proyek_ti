@@ -1,10 +1,10 @@
 <?php
 
+use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\BannerController;
 use App\Http\Controllers\BiayaController;
 use App\Http\Controllers\EventController;
 use App\Http\Controllers\FaqController;
-use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\JadwalController;
 use App\Http\Controllers\KontakController;
@@ -29,7 +29,6 @@ use App\Http\Controllers\TentangController;
 Route::get('/', [HomeController::class, 'index'])->name('home');
 
 // Admin
-
 Route::get('/admin', function () {
     return view('admin.home-admin');
 });
