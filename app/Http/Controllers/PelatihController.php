@@ -64,16 +64,18 @@ class PelatihController extends Controller
             ]
         );
 
-        $input = $request->all();
+        $data = $request->all();
 
-        if ($image = $request->file("foto")) {
+        if ($request->hasFile("foto")) {
+
+            $image = $request->file("foto");
             $destinationPath = "images/";
             $profileImage = date("YmdHis") . "." . $image->getClientOriginalExtension();
             $image->move($destinationPath, $profileImage);
-            $input["foto"] = "$profileImage";
+            $data["foto"] = "$profileImage";
         }
 
-        Pelatih::create($input);
+        Pelatih::create($data);
 
         Alert::success('Data Pelatih', 'Berhasil Ditambahkan!');
         return redirect('/admin/pelatih');
@@ -95,7 +97,7 @@ class PelatihController extends Controller
         return view(
             'admin.pelatih.edit',
             [
-                'judul' => 'Edit Pelatih',
+                'judul' => 'Ubah Pelatih',
                 'data' => $pelatih
             ]
         );
@@ -126,18 +128,21 @@ class PelatihController extends Controller
             ]
         );
 
-        $input = $request->all();
+        $data = $request->all();
 
-        if ($image = $request->file("foto")) {
+        if ($request->hasFile("foto")) {
+            File::delete('images/' . $pelatih->foto);
+
+            $image = $request->file("foto");
             $destinationPath = "images/";
             $profileImage = date("YmdHis") . "." . $image->getClientOriginalExtension();
             $image->move($destinationPath, $profileImage);
-            $input["foto"] = "$profileImage";
+            $data["foto"] = "$profileImage";
         } else {
-            unset($input["foto"]);
+            unset($data["foto"]);
         }
 
-        $pelatih->update($input);
+        $pelatih->update($data);
 
         Alert::success('Data Pelatih', 'Berhasil Diubah!');
         return redirect('/admin/pelatih');

@@ -12,15 +12,18 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('member', function (Blueprint $table) {
-            $table->id();
-            $table->string('nama');
-            $table->string('tempat_lahir');
+            $table->increments('id_member');
+            $table->string('nama_anak', 255);
+            $table->string('jenis_kelamin', 20);
             $table->date('tanggal_lahir');
-            $table->string('alamat');
-            $table->string('sekolah');
-            $table->integer('wa_ortu');
             $table->integer('umur');
-            $table->string('level');
+            $table->string('ig_anak', 255)->default(null);
+            $table->string('nama_ortu', 255);
+            $table->string('wa_ortu', 14);
+            $table->string('ig_ortu', 255)->default(null);
+            $table->text('alamat');
+            $table->string('asal_sekolah', 255)->default(null);
+            $table->string('level', 255);
             $table->timestamps();
         });
     }

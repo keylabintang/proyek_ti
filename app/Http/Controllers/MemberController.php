@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use DateTime;
+use Carbon\Carbon;
 use App\Models\Member;
 use Illuminate\Http\Request;
-use Carbon\Carbon;
 
 class MemberController extends Controller
 {
@@ -13,9 +14,9 @@ class MemberController extends Controller
      */
     public function index()
     {
-        $judul = "Data Member";
-        $data = Member::orderBy('id', 'asc')->get();
-        
+        $judul = "Daftar Member";
+        $data = Member::oldest()->get();
+
         return view('admin.member.index', compact('judul', 'data'));
     }
 
@@ -26,9 +27,7 @@ class MemberController extends Controller
     {
         $judul = "Tambah Member";
 
-        $member = Member::all();
-
-        return view('admin.member.create', compact('judul', 'member'));
+        return view('admin.member.create', compact('judul'));
     }
 
     /**
@@ -37,42 +36,39 @@ class MemberController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'nama' => 'required',
-            'tempat_lahir' => 'required',
+            'nama_anak' => 'required',
+            'jenis_kelamin' => 'required',
             'tanggal_lahir' => 'required',
+            'nama_ortu' => 'required',
+            'wa_ortu' => 'required',
             'alamat' => 'required',
-            'sekolah' => 'required',
-            'wa_ortu' => 'required|numeric',
-            'umur' => 'required|numeric',
             'level' => 'required',
         ], [
-            'nama.required' => 'Nama wajib diisi',
-            'tempat_lahir.required' => 'tempat_lahir wajib diisi',
-            'tanggal_lahir.required' => 'tanggal_lahir wajib diisi',
-            'alamat.required' => 'alamat wajib diisi',
-            'sekolah.required' => 'sekolah wajib diisi',
-            'wa_ortu.required' => 'Nomor Orang Tua wajib diisi',
-            'wa_ortu.numeric' => 'Nomor Orang Tua wajib diisi dengan angka',
-            'umur.required' => 'umur wajib diisi',
-            'umur.numeric' => 'umur wajib diisi dengan angka',
-            'level.required' => 'level wajib diisi',
+            'nama_anak.required' => 'Nama anak harus diisi',
+            'jenis_kelamin.required' => 'Jenis kelamin harus diisi',
+            'tanggal_lahir.required' => 'Tanggal lahir harus diisi',
+            'sekolah.required' => 'Sekolah harus diisi',
+            'nama_ortu.required' => 'Nama orang tua harus diisi',
+            'wa_ortu.required' => 'Nomor wa orang tua harus diisi',
+            'alamat.required' => 'Alamat harus diisi',
+            'level.required' => 'level harus diisi',
         ]);
 
+        $data = $request->all();
 
-        $data = [
-            'nama' => $request->input('nama'),
-            'tempat_lahir' => $request->input('tempat_lahir'),
-            'tanggal_lahir' => $request->input('tanggal_lahir'),
-            'alamat' => $request->input('alamat'),
-            'sekolah' => $request->input('sekolah'),
-            'wa_ortu' => $request->input('wa_ortu'),
-            'umur' => $request->input('umur'),
-            'level' => $request->input('level'),
-        ];
+        $data['umur'] = $this->hitungUmur($data['tanggal_lahir']);
 
         Member::create($data);
 
         return redirect('/admin/member');
+    }
+
+    private function hitungUmur($tanggal_lahir)
+    {
+        $tanggal_lahir = new DateTime($tanggal_lahir);
+        $tanggal_sekarang = new DateTime();
+        $perbedaan = $tanggal_sekarang->diff($tanggal_lahir);
+        return $perbedaan->y; // Mengembalikan umur dalam tahun
     }
 
     /**
@@ -88,9 +84,10 @@ class MemberController extends Controller
      */
     public function edit(Member $member)
     {
-        $judul = "Edit Member";
+        $judul = "Ubah Member";
+        $data = $member;
 
-        return view('admin/member/edit', compact('member', 'judul'));
+        return view('admin.member.edit', compact('data', 'judul'));
     }
 
     /**
@@ -99,38 +96,32 @@ class MemberController extends Controller
     public function update(Request $request, Member $member)
     {
         $request->validate([
-            'nama' => 'required',
-            'tempat_lahir' => 'required',
+            'nama_anak' => 'required',
+            'jenis_kelamin' => 'required',
             'tanggal_lahir' => 'required',
+            'nama_ortu' => 'required',
+            'wa_ortu' => 'required',
             'alamat' => 'required',
-            'sekolah' => 'required',
-            'wa_ortu' => 'required|numeric',
-            'umur' => 'required|numeric',
             'level' => 'required',
         ], [
-            'nama.required' => 'Nama wajib diisi',
-            'tempat_lahir.required' => 'tempat_lahir wajib diisi',
-            'tanggal_lahir.required' => 'tanggal_lahir wajib diisi',
-            'alamat.required' => 'alamat wajib diisi',
-            'sekolah.required' => 'sekolah wajib diisi',
-            'wa_ortu.required' => 'Nomor Orang Tua wajib diisi',
-            'wa_ortu.numeric' => 'Nomor Orang Tua wajib diisi dengan angka',
-            'umur.required' => 'umur wajib diisi',
-            'umur.numeric' => 'umur wajib diisi dengan angka',
-            'level.required' => 'level wajib diisi',
+            'nama_anak.required' => 'Nama anak harus diisi',
+            'jenis_kelamin.required' => 'Jenis kelamin harus diisi',
+            'tanggal_lahir.required' => 'Tanggal lahir harus diisi',
+            'sekolah.required' => 'Sekolah harus diisi',
+            'nama_ortu.required' => 'Nama orang tua harus diisi',
+            'wa_ortu.required' => 'Nomor wa orang tua harus diisi',
+            'alamat.required' => 'Alamat harus diisi',
+            'level.required' => 'level harus diisi',
         ]);
 
+        $data = $request->all();
 
-        $data = [
-            'nama' => $request->input('nama'),
-            'tempat_lahir' => $request->input('tempat_lahir'),
-            'tanggal_lahir' => $request->input('tanggal_lahir'),
-            'alamat' => $request->input('alamat'),
-            'sekolah' => $request->input('sekolah'),
-            'wa_ortu' => $request->input('wa_ortu'),
-            'umur' => $request->input('umur'),
-            'level' => $request->input('level'),
-        ];
+        // cek apakah tanggal lahir diubah
+        if ($request->has('tanggal_lahir')) {
+            $data['umur'] = $this->hitungUmur($data['tanggal_lahir']);
+        } else {
+            $data['umur'] = $member->umur;
+        }
 
         $member->update($data);
 

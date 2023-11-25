@@ -13,11 +13,11 @@ return new class extends Migration
     {
         Schema::create('pelatih', function (Blueprint $table) {
             $table->increments('id_pelatih');
-            $table->string('nama', 199);
-            $table->string('nama_panggilan', 99);
+            $table->string('nama', 255);
+            $table->string('nama_panggilan', 255);
             $table->string('no_wa', 14);
             $table->string('ig', 99);
-            $table->string('keterangan', 199);
+            $table->string('keterangan', 255);
             $table->text('foto');
             $table->char('status', 1)->default(1);
             $table->timestamps();

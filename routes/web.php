@@ -29,12 +29,21 @@ use App\Http\Controllers\AbsensiController;
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
 
+Route::get('/pendaftaran', function () {
+    return view('pendaftaran');
+});
+
 // Admin
 Route::get('/admin', function () {
     return view('admin.home-admin');
 });
 
-Route::resource('/pendaftaran', PendaftaranController::class);
+Route::resource('/admin/pendaftaran', PendaftaranController::class);
+Route::post('receive/{pendaftaran}', [PendaftaranController::class, 'receive'])->name('pendaftaran.receive');
+Route::post('reject/{pendaftaran}', [PendaftaranController::class, 'reject'])->name('pendaftaran.reject');
+// Route::get('/admin/pendaftaran/receive/{pendaftaran}', [PendaftaranController::class, 'receive'])->name('pendaftaran.receive');
+
+
 
 Route::resource('/admin/member', MemberController::class);
 
