@@ -1,1 +1,3 @@
-new DataTable("#example");
+$("#example").DataTable({
+    responsive: true,
+});

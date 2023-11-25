@@ -28,12 +28,20 @@ use App\Http\Controllers\TentangController;
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
 
+Route::get('/pendaftaran', function () {
+    return view('pendaftaran');
+});
+
 // Admin
 Route::get('/admin', function () {
     return view('admin.home-admin');
 });
 
-Route::resource('/pendaftaran', PendaftaranController::class);
+Route::resource('/admin/pendaftaran', PendaftaranController::class);
+Route::post('receive/{pendaftaran}', [PendaftaranController::class, 'receive'])->name('pendaftaran.receive');
+// Route::get('/admin/pendaftaran/receive/{pendaftaran}', [PendaftaranController::class, 'receive'])->name('pendaftaran.receive');
+
+
 
 Route::resource('/admin/member', MemberController::class);
 
