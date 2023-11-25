@@ -69,29 +69,57 @@
                           @endif
                         </td>
                         <td>
+                          @if ($dt->status == 1)
                           <div class="dropdown">
-                              <button type="button" class="btn p-0 dropdown-toggle hide-arrow"
-                                  data-bs-toggle="dropdown">
-                                  <i class="bx bx-dots-vertical-rounded"></i>
-                              </button>
-                              <div class="dropdown-menu">
-                                  <a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#viewdetail-{{ $dt->nama_anak }}">
-                                      <i class="bx bx-error-circle me-1"></i>
-                                      View Detail
-                                  </a>
-                                  <form action="{{ route('pendaftaran.receive', $dt->id_pendaftaran) }}" method="POST">
-                                      @csrf
-                                      <button type="submit" class="dropdown-item">
-                                          <i class="bx bx-check-circle me-1"></i>
-                                          Receive
-                                      </button>
-                                  </form>
-                                  <a class="dropdown-item" href="{{ route('pendaftaran.show', $dt->id_pendaftaran) }}">
+                            <button type="button" class="btn p-0 dropdown-toggle hide-arrow"
+                                data-bs-toggle="dropdown">
+                                <i class="bx bx-dots-vertical-rounded"></i>
+                            </button>
+                            <div class="dropdown-menu">
+                                <a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#viewdetail-{{ $dt->nama_anak }}">
+                                    <i class="bx bx-error-circle me-1"></i>
+                                    View Detail
+                                </a>
+                                <form action="{{ route('pendaftaran.receive', $dt->id_pendaftaran) }}" method="POST">
+                                    @csrf
+                                    <button type="submit" class="dropdown-item">
+                                        <i class="bx bx-check-circle me-1"></i>
+                                        Receive
+                                    </button>
+                                </form>
+                                <form action="{{ route('pendaftaran.reject', $dt->id_pendaftaran) }}" method="POST">
+                                    @csrf
+                                    <button type="submit" class="dropdown-item">
                                       <i class="bx bx-x-circle me-1"></i>
                                       Reject
-                                  </a>
-                              </div>
+                                    </button>
+                                </form>
+                            </div>
                           </div>
+                          @else
+                          <div class="dropdown">
+                            <button type="button" class="btn p-0 dropdown-toggle hide-arrow"
+                                data-bs-toggle="dropdown">
+                                <i class="bx bx-dots-vertical-rounded"></i>
+                            </button>
+                            <div class="dropdown-menu">
+                                <a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#viewdetail-{{ $dt->nama_anak }}">
+                                    <i class="bx bx-error-circle me-1"></i>
+                                    View Detail
+                                </a>
+                                <form action="{{ route('pendaftaran.destroy', $dt->id_pendaftaran) }}" method="POST">
+                                  @csrf
+                                  @method('DELETE')
+                                  <button type="submit" class="dropdown-item"
+                                      onclick="javascript: return confirm('Apakah anda yakin ingin menghapus data ini ?')">
+                                      <i class="bx bx-trash me-1"></i>
+                                      Delete
+                                  </button>
+                              </form>
+                            </div>
+                          </div>
+                          @endif
+                          
                         </td>
                       </tr>
                     @endforeach

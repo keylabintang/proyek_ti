@@ -89,31 +89,44 @@ class PendaftaranController extends Controller
 
     public function receive(Pendaftaran $pendaftaran)
     {
-        // var_dump($pendaftaran->id_pendaftaran);
-        $pendaftaran->status = 2;
-        $pendaftaran->update();
+        // cek status Waiting
+        if ($pendaftaran->status == 1) {
 
+            // ubah status jadi Receive
+            $pendaftaran->status = 2;
+            $pendaftaran->update();
 
-        $member = new Member;
-        $member->nama_anak = $pendaftaran->nama_anak;
-        $member->jenis_kelamin = $pendaftaran->jenis_kelamin;
-        $member->tanggal_lahir = $pendaftaran->tanggal_lahir;
-        $member->umur = $pendaftaran->umur;
-        $member->ig_anak = $pendaftaran->ig_anak;
-        $member->nama_ortu = $pendaftaran->nama_ortu;
-        $member->wa_ortu = $pendaftaran->wa_ortu;
-        $member->ig_ortu = $pendaftaran->ig_ortu;
-        $member->alamat = $pendaftaran->alamat;
-        $member->asal_sekolah = $pendaftaran->asal_sekolah;
-        $member->level = $pendaftaran->level;
-        $member->save();
+            // tambahkan data pendaftaran ke tabel member
+            $member = new Member;
+            $member->nama_anak = $pendaftaran->nama_anak;
+            $member->jenis_kelamin = $pendaftaran->jenis_kelamin;
+            $member->tanggal_lahir = $pendaftaran->tanggal_lahir;
+            $member->umur = $pendaftaran->umur;
+            $member->ig_anak = $pendaftaran->ig_anak;
+            $member->nama_ortu = $pendaftaran->nama_ortu;
+            $member->wa_ortu = $pendaftaran->wa_ortu;
+            $member->ig_ortu = $pendaftaran->ig_ortu;
+            $member->alamat = $pendaftaran->alamat;
+            $member->asal_sekolah = $pendaftaran->asal_sekolah;
+            $member->level = $pendaftaran->level;
+            $member->save();
 
-        return back();
+            return back();
+        } else {
+            return back();
+        }
     }
 
     public function reject(Pendaftaran $pendaftaran)
     {
-        //
+        // cek status Waiting
+        if ($pendaftaran->status == 1) {
+            $pendaftaran->status = 3;
+            $pendaftaran->update();
+            return back();
+        } else {
+            return back();
+        }
     }
 
     /**
@@ -145,6 +158,9 @@ class PendaftaranController extends Controller
      */
     public function destroy(Pendaftaran $pendaftaran)
     {
-        //
+        $pendaftaran->delete();
+
+        // Alert::success('Data Pelatih', 'Berhasil dihapus!');
+        return redirect('/admin/pendaftaran');
     }
 }
