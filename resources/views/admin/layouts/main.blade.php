@@ -14,7 +14,7 @@
     <meta name="description" content="" />
 
     <!-- Favicon -->
-    <link rel="icon" type="image/x-icon" href="{{ asset('assets_admin/img/logo/logo_tab.png') }}" />
+    <link rel="icon" type="image/x-icon" href="{{ asset('assets_admin/img/logo/cis.png') }}" />
 
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -80,6 +80,7 @@
                     <!-- / Footer -->
 
                     <div class="content-backdrop fade"></div>
+
                 </div>
                 <!-- Content wrapper -->
             </div>
@@ -95,10 +96,11 @@
       <a href="https://themeselection.com/item/sneat-bootstrap-html-admin-template/" target="_blank" class="btn btn-danger btn-buy-now">Upgrade to Pro</a>
     </div> -->
 
-    @include('sweetalert::alert')
 
     <!-- Core JS -->
     <!-- build:js assets/vendor/js/core.js -->
+
+    @include('sweetalert::alert')
 
     <script src="{{ asset('assets_admin/vendor/libs/jquery/jquery.js') }}"></script>
     <script src="{{ asset('assets_admin/vendor/libs/popper/popper.js') }}"></script>

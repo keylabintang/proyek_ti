@@ -33,20 +33,6 @@
                         </div>
                     </div>
                     <div class="row mb-3">
-                        <label class="col-sm-2 col-form-label" for="keterangan">Keterangan</label>
-                        <div class="col-sm-4">
-                            <div class="input-group">
-                                <input type="text" class="form-control @error('keterangan') border-danger @enderror"
-                                    id="keterangan" name="keterangan" value="{{ old('keterangan', $data->keterangan) }}" />
-                            </div>
-                            @error('keterangan')
-                                <div class="form-text text-danger">
-                                    *{{ $message }}
-                                </div>
-                            @enderror
-                        </div>
-                    </div>
-                    <div class="row mb-3">
                         <label class="col-sm-2 col-form-label" for="timeline">Timeline</label>
                         <div class="col-sm-4">
                             <div class="input-group">
@@ -74,7 +60,20 @@
                             @enderror
                         </div>
                     </div>
-
+                    <div class="row mb-3">
+                        <label class="col-sm-2 col-form-label" for="keterangan">Keterangan</label>
+                        <div class="col-sm-4">
+                            <div class="input-group">
+                                <textarea type="text" class="form-control @error('keterangan') border-danger @enderror"
+                                    id="keterangan" name="keterangan" rows="3">{{ old('keterangan', $data->keterangan) }}</textarea>
+                            </div>
+                            @error('keterangan')
+                                <div class="form-text text-danger">
+                                    *{{ $message }}
+                                </div>
+                            @enderror
+                        </div>
+                    </div>
                     <div class="row mb-3">
                         <label class="col-sm-2 col-form-label" for="poster">Poster</label>
                         <div class="col-sm-4">

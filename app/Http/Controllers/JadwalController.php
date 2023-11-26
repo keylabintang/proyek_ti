@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Jadwal;
 use Illuminate\Http\Request;
+use RealRashid\SweetAlert\Facades\Alert;
+
 
 class JadwalController extends Controller
 {
@@ -12,10 +14,19 @@ class JadwalController extends Controller
      */
     public function index()
     {
-        $judul = "Data Jadwal";
-        $data = Jadwal::orderBy('id_jadwal', 'asc')->get();
-        
-        return view('admin.jadwal.index', compact('judul', 'data'));
+        $jadwal = Jadwal::oldest()->get();
+
+        $title_alert = 'Hapus Data!';
+        $text_alert = "Apakah anda yakin ingin menghapus data ini ??";
+        confirmDelete($title_alert, $text_alert);
+
+        return view(
+            'admin.jadwal.index',
+            [
+                'data' => $jadwal,
+                'judul' => 'Daftar Jadwal'
+            ]
+        );
     }
 
     /**
@@ -23,11 +34,12 @@ class JadwalController extends Controller
      */
     public function create()
     {
-        $judul = "Tambah Jadwal";
-
-        $jadwal = Jadwal::all();
-
-        return view('admin.jadwal.create', compact('judul', 'jadwal'));
+        return view(
+            'admin.jadwal.create',
+            [
+                'judul' => 'Tambah Jadwal'
+            ]
+        );
     }
 
     /**
@@ -38,12 +50,10 @@ class JadwalController extends Controller
         $request->validate([
             'tanggal' => 'required',
             'waktu' => 'required',
-            'hari' => 'required',
             'tempat' => 'required',
         ], [
             'tanggal.required' => 'tanggal wajib diisi',
             'waktu.required' => 'waktu wajib diisi',
-            'hari.required' => 'hari wajib diisi',
             'tempat.required' => 'tempat wajib diisi',
         ]);
 
@@ -51,12 +61,12 @@ class JadwalController extends Controller
         $data = [
             'tanggal' => $request->input('tanggal'),
             'waktu' => $request->input('waktu'),
-            'hari' => $request->input('hari'),
             'tempat' => $request->input('tempat'),
         ];
 
         Jadwal::create($data);
 
+        Alert::success('Data Jadwal', 'Berhasil ditambahkan!');
         return redirect('/admin/jadwal');
     }
 
@@ -73,9 +83,13 @@ class JadwalController extends Controller
      */
     public function edit(Jadwal $jadwal)
     {
-        $judul = "Edit Jadwal";
-
-        return view('admin/jadwal/edit', compact('jadwal', 'judul'));
+        return view(
+            'admin.jadwal.create',
+            [
+                'judul' => 'Edit Jadwal',
+                'jadwal' => $jadwal
+            ]
+        );
     }
 
     /**
@@ -86,12 +100,10 @@ class JadwalController extends Controller
         $request->validate([
             'tanggal' => 'required',
             'waktu' => 'required',
-            'hari' => 'required',
             'tempat' => 'required',
         ], [
             'tanggal.required' => 'tanggal wajib diisi',
             'waktu.required' => 'waktu wajib diisi',
-            'hari.required' => 'hari wajib diisi',
             'tempat.required' => 'tempat wajib diisi',
         ]);
 
@@ -99,12 +111,12 @@ class JadwalController extends Controller
         $data = [
             'tanggal' => $request->input('tanggal'),
             'waktu' => $request->input('waktu'),
-            'hari' => $request->input('hari'),
             'tempat' => $request->input('tempat'),
         ];
 
         $jadwal->update($data);
 
+        Alert::success('Data Jadwal', 'Berhasil diubah!');
         return redirect('/admin/jadwal');
     }
 
@@ -114,7 +126,7 @@ class JadwalController extends Controller
     public function destroy(Jadwal $jadwal)
     {
         $jadwal->delete();
-        // Alert::success('Data Member', 'Berhasil dihapus!!');
+        Alert::success('Data Jadwal', 'Berhasil dihapus!!');
         return redirect('/admin/jadwal');
     }
 }

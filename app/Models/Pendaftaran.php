@@ -11,12 +11,7 @@ class Pendaftaran extends Model
 
     protected $table = "pendaftaran";
 
-    protected $fillable = [
-        'nama',
-        'tempat_lahir',
-        'tanggal_lahir',
-        'alamat',
-        'sekolah',
-        'wa_ortu',
-    ];
+    protected $primaryKey = 'id_pendaftaran';
+
+    protected $guarded = [];
 }

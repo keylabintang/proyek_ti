@@ -13,11 +13,11 @@ return new class extends Migration
     {
         Schema::create('program', function (Blueprint $table) {
             $table->increments('id_program');
-            $table->string('nama');
+            $table->string('nama', 199);
             $table->date('tanggal');
-            $table->string('hari');
             $table->time('waktu');
-            $table->string('tempat');
+            $table->string('tempat', 199);
+            $table->string('keterangan', 399);
             $table->timestamps();
         });
     }
