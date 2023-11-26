@@ -50,6 +50,8 @@ Route::resource('/admin/member', MemberController::class);
 Route::resource('/admin/pelatih', PelatihController::class);
 
 Route::resource('/admin/absensi', AbsensiController::class);
+Route::post('generate', [AbsensiController::class, 'generate'])->name('absensi.generate');
+
 
 Route::resource('/admin/jadwal', JadwalController::class);
 

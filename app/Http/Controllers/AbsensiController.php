@@ -9,6 +9,32 @@ use Illuminate\Http\Request;
 
 class AbsensiController extends Controller
 {
+    public function generate($jadwal)
+    {
+        // Ambil semua data dari TabelA
+        $member = Member::all();
+
+        $judul = "Data Absensi";
+
+        $jadwal = Jadwal::where('status', '=', 0)->get();
+
+
+        // Loop melalui setiap data dan simpan ke ab$absensi
+        foreach ($member as $data) {
+            // Buat instance model ab$absensi
+            $absensi = new Absensi;
+
+            // Setel nilai atribut model ab$absensi dengan nilai dari TabelA
+            $absensi->nama = $data->nama_anak;
+            $absensi->tanggal = $jadwal;
+            // Tambahkan atribut lain sesuai kebutuhan
+
+            // Simpan data ke ab$absensi
+            $absensi->save();
+        }
+
+        return "Absensi berhasil dibuat";
+    }
     /**
      * Display a listing of the resource.
      */
@@ -29,9 +55,9 @@ class AbsensiController extends Controller
 
         $jadwal = Jadwal::where('status', '=', 0)->get();
 
-        $member = Member::all();
+        $absensi = Absensi::all();
 
-        return view('admin.absensi.create', compact('judul', 'jadwal', 'member'));
+        return view('admin.absensi.create', compact('judul', 'jadwal', 'absensi'));
     }
 
     /**
@@ -39,7 +65,32 @@ class AbsensiController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'tanggal' => 'required',
+        ], [
+            'tanggal.required' => 'tanggal wajib diisi',
+        ]);
+
+
+        // Ambil semua data dari TabelA
+        $member = Member::all();
+
+
+        // Loop melalui setiap data dan simpan ke ab$absensi
+        foreach ($member as $data) {
+            // Buat instance model ab$absensi
+            
+            $data = [
+            'nama' => $data->nama_anak,
+            'tanggal' => $request->input('tanggal'),
+        ];
+
+            Absensi::create($data);
+
+        }
+
+        return redirect('/admin/jadwal');
+
     }
 
     /**
