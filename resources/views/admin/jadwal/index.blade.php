@@ -53,11 +53,6 @@
                                                 Delete
                                             </button>
                                         </form>
-                                        {{-- <a class="dropdown-item" href="{{ route('jadwal.destroy', $dt->id_jadwal) }}"
-                                            data-confirm-delete="true">
-                                            <i class="bx bx-trash me-1"></i>
-                                            Delete
-                                        </a> --}}
                                     </div>
                                 </div>
                             </td>
