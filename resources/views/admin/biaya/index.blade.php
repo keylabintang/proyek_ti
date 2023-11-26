@@ -28,8 +28,8 @@
                         <tr>
                             <td>{{ $loop->index + 1 }}. </td>
                             <td>{{ $dt->nama }}</td>
-                            <td>{{ \Carbon\Carbon::parse($dt->tanggal)->format('d-m-Y') }}</td>
-                            <td>{{ $dt->Keterangan }}</td>
+                            <td>{{ \Carbon\Carbon::parse($dt->tanggal)->translatedFormat('l, d F Y') }}</td>
+                            <td>{{ $dt->keterangan }}</td>
                             <td>
                                 <div class="dropdown">
                                     <button type="button" class="btn p-0 dropdown-toggle hide-arrow"

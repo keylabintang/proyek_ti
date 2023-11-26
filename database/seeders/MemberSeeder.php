@@ -15,7 +15,7 @@ class MemberSeeder extends Seeder
     public function run(): void
     {
         DB::table('member')->insert([
-            'nama_anak' => 'gARU',
+            'nama_anak' => 'Reza',
             'jenis_kelamin' => 'laki-laki',
             'tanggal_lahir' => '2023-11-12',
             'umur' => 13,

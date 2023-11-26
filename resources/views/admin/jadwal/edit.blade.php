@@ -50,10 +50,17 @@
                     <div class="row mb-3">
                         <label class="col-sm-2 col-form-label" for="tempat">Tempat</label>
                         <div class="col-sm-4">
+
                             <div class="input-group">
-                                <input type="text" class="form-control @error('tempat') border-danger @enderror"
-                                    id="tempat" name="tempat" value="{{ $jadwal->tempat }}"
-                                    placeholder="Masukkan Tempat" />
+                                <select class="form-select @error('tempat') border-danger @enderror" id="tempat"
+                                    aria-label="Example select with button addon" name="tempat">
+                                    @if ($jadwal->tempat != null)
+                                        <option selected value="{{ $jadwal->tempat }}">{{ $jadwal->tempat }}</option>
+                                    @else
+                                        <option selected>Pilih Tempat</option>
+                                        <option value="Area Parkir Living Plaza">Area Parkir Living Plaza</option>
+                                    @endif
+                                </select>
                             </div>
                             @error('tempat')
                                 <div class="form-text text-danger">

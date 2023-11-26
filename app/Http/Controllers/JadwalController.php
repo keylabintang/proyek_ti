@@ -84,7 +84,7 @@ class JadwalController extends Controller
     public function edit(Jadwal $jadwal)
     {
         return view(
-            'admin.jadwal.create',
+            'admin.jadwal.edit',
             [
                 'judul' => 'Edit Jadwal',
                 'jadwal' => $jadwal
@@ -126,6 +126,7 @@ class JadwalController extends Controller
     public function destroy(Jadwal $jadwal)
     {
         $jadwal->delete();
+
         Alert::success('Data Jadwal', 'Berhasil dihapus!!');
         return redirect('/admin/jadwal');
     }

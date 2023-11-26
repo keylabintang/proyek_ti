@@ -30,10 +30,8 @@
                         @endphp
                         <tr>
                             <td>{{ $loop->index + 1 }}. </td>
-                            <td>{{ \Carbon\Carbon::parse($dt->tanggal)->format('d-m-Y') }}</td>
-                            <td>{{ $dt->hari }}</td>
-                            <td>{{ Form::time('time',\Carbon\Carbon::parse($dt->waktu)->timezone('Europe/Brussels')->format('H.i'),['class' => 'form-control']) }}
-                            </td>
+                            <td>{{ \Carbon\Carbon::parse($dt->tanggal)->translatedFormat('l, d F Y') }}</td>
+                            <td>{{ \Carbon\Carbon::parse($dt->waktu)->format('H:i') }}</td>
                             <td>{{ $dt->tempat }}</td>
                             <td>
                                 <div class="dropdown">
@@ -46,11 +44,20 @@
                                             <i class="bx bx-edit-alt me-1"></i>
                                             Edit
                                         </a>
-                                        <a class="dropdown-item" href="{{ route('jadwal.destroy', $dt->id_jadwal) }}"
+                                        <form action="{{ route('jadwal.destroy', $dt->id_jadwal) }}" method="POST">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button type="submit" class="dropdown-item"
+                                                onclick="javascript: return confirm('Apakah anda yakin ingin menghapus data ini ?')">
+                                                <i class="bx bx-trash me-1"></i>
+                                                Delete
+                                            </button>
+                                        </form>
+                                        {{-- <a class="dropdown-item" href="{{ route('jadwal.destroy', $dt->id_jadwal) }}"
                                             data-confirm-delete="true">
                                             <i class="bx bx-trash me-1"></i>
                                             Delete
-                                        </a>
+                                        </a> --}}
                                     </div>
                                 </div>
                             </td>

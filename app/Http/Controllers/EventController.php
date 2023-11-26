@@ -128,7 +128,18 @@ class EventController extends Controller
 
         $input = $request->all();
 
+        $data_event = Event::find($event->id_event);
+
         if ($image = $request->file("poster")) {
+            // remove old file
+            $path = "images/";
+
+            if($data_event->poster != ''  && $data_event->poster != null){
+               $file_old = $path.$data_event->poster;
+               unlink($file_old);
+            }
+
+            // upload new file
             $destinationPath = "images/";
             $profileImage = date("YmdHis") . "." . $image->getClientOriginalExtension();
             $image->move($destinationPath, $profileImage);
@@ -148,7 +159,7 @@ class EventController extends Controller
      */
     public function destroy(Event $event)
     {
-        File::delete('images/' . $event->foto);
+        File::delete('images/' . $event->poster);
         $event->delete();
 
         Alert::success('Data Event', 'Berhasil dihapus!');

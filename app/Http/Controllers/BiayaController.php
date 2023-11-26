@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Biaya;
+use App\Models\Member;
 use Illuminate\Http\Request;
 
 class BiayaController extends Controller
@@ -14,6 +15,8 @@ class BiayaController extends Controller
     {
         $judul = "Data Biaya Bulanan";
         $data = Biaya::orderBy('id_biaya', 'asc')->get();
+
+
         
         return view('admin.biaya.index', compact('judul', 'data'));
     }
@@ -27,7 +30,10 @@ class BiayaController extends Controller
 
         $biaya = Biaya::all();
 
-        return view('admin.biaya.create', compact('judul', 'biaya'));
+        $member = Member::all();
+
+
+        return view('admin.biaya.create', compact('judul', 'biaya', 'member'));
     }
 
     /**
@@ -108,7 +114,7 @@ class BiayaController extends Controller
     public function destroy(Biaya $biaya)
     {
         $biaya->delete();
-        // Alert::success('Data Member', 'Berhasil dihapus!!');
+        Alert::success('Data Biaya', 'Berhasil dihapus!!');
         return redirect('/admin/biaya');
     }
 }

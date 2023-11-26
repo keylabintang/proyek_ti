@@ -51,12 +51,11 @@
                         <label class="col-sm-2 col-form-label" for="tempat">Tempat</label>
                         <div class="col-sm-4">
                             <div class="input-group">
-                                <input type="text" class="form-control @error('tempat') border-danger @enderror"
-                                    list="datalistOption" id="tempat" name="tempat" value="{{ old('tempat') }}"
-                                    placeholder="Masukkan Tempat" />
-                                <datalist id="datalistOption">
-                                    <option value="Area Parkir Living Plaza"></option>
-                                </datalist>
+                                <select class="form-select @error('tempat') border-danger @enderror" id="tempat"
+                                    aria-label="Example select with button addon" name="tempat">
+                                    <option selected>Pilih Tempat</option>
+                                    <option value="Area Parkir Living Plaza">Area Parkir Living Plaza</option>
+                                </select>
                             </div>
                             @error('tempat')
                                 <div class="form-text text-danger">

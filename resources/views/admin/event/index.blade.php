@@ -30,7 +30,7 @@
                         <tr>
                             <td>{{ $loop->index + 1 }}. </td>
                             <td>
-                              <img src="{{ asset('images/'.$dt->poster) }}" alt="poster event" width="45">
+                                <img src="{{ asset('images/' . $dt->poster) }}" alt="poster event" width="45">
                             </td>
                             <td>{{ $dt->nama }}</td>
                             <td>{{ $dt->timeline }}</td>
@@ -47,7 +47,8 @@
                                             <i class="bx bx-edit-alt me-1"></i>
                                             Edit
                                         </a>
-                                        <a class="dropdown-item" href="{{ route('event.destroy', $dt->id_event) }}" data-confirm-delete="true">
+                                        <a class="dropdown-item" href="{{ route('event.destroy', $dt->id_event) }}"
+                                            data-confirm-delete="true">
                                             <i class="bx bx-trash me-1"></i>
                                             Delete
                                         </a>

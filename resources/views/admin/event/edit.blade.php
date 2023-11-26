@@ -64,8 +64,8 @@
                         <label class="col-sm-2 col-form-label" for="keterangan">Keterangan</label>
                         <div class="col-sm-4">
                             <div class="input-group">
-                                <textarea type="text" class="form-control @error('keterangan') border-danger @enderror"
-                                    id="keterangan" name="keterangan" rows="3">{{ old('keterangan', $data->keterangan) }}</textarea>
+                                <textarea type="text" class="form-control @error('keterangan') border-danger @enderror" id="keterangan"
+                                    name="keterangan" rows="3">{{ old('keterangan', $data->keterangan) }}</textarea>
                             </div>
                             @error('keterangan')
                                 <div class="form-text text-danger">
@@ -78,7 +78,10 @@
                         <label class="col-sm-2 col-form-label" for="poster">Poster</label>
                         <div class="col-sm-4">
                             <div class="input-group">
-                                <input type="file" id="poster" class="form-control @error('poster') border-danger @enderror" name="poster" value="{{ old('poster', $data->poster) }}" accept="image/*" onchange="document.getElementById('output').src = window.URL.createObjectURL(this.files[0])">
+                                <input type="file" id="poster"
+                                    class="form-control @error('poster') border-danger @enderror" name="poster"
+                                    value="{{ old('poster', $data->poster) }}" accept="image/*"
+                                    onchange="document.getElementById('output').src = window.URL.createObjectURL(this.files[0])">
                             </div>
                             @error('poster')
                                 <div class="form-text text-danger">
@@ -86,17 +89,17 @@
                                 </div>
                             @enderror
                             <div class="img-output mt-3 d-flex justify-content-center">
-                                <img src="{{ asset('images/'.$data->poster) }}" id="output" width="280">
+                                <img src="{{ asset('images/' . $data->poster) }}" id="output" width="280">
                             </div>
                         </div>
                     </div>
                     <div class="row justify-content-end mt-4">
                         <div class="col-sm-10">
                             <a href="/admin/event">
-                                <button type="button" class="btn btn-sm btn-secondary px-3">Back
+                                <button type="button" class="btn btn-sm btn-secondary px-3">Kembali
                                 </button>
                             </a>
-                            <button type="submit" class="btn btn-sm btn-primary px-3">Save</button>
+                            <button type="submit" class="btn btn-sm btn-primary px-3">Edit</button>
                         </div>
                     </div>
                 </form>

@@ -20,12 +20,21 @@
                 <form action="/admin/biaya" method="POST">
                     @csrf
                     <div class="row mb-3">
-                        <label class="col-sm-2 col-form-label" for="tempat">Nama</label>
+                        <label class="col-sm-2 col-form-label" for="nama">Nama</label>
                         <div class="col-sm-4">
                             <div class="input-group">
+                                <select class="form-select @error('nama') border-danger @enderror" id="nama"
+                                    aria-label="Example select with button addon" name="nama">
+                                    <option selected>Pilih Member</option>
+                                    @foreach ($member as $mmr)
+                                        <option value="{{ $mmr->nama_anak }}">{{ $mmr->nama_anak }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                            {{-- <div class="input-group">
                                 <input type="text" class="form-control @error('nama') border-danger @enderror"
                                     id="nama" name="nama" value="{{ old('nama') }}" placeholder="Masukkan Nama" />
-                            </div>
+                            </div> --}}
                             @error('nama')
                                 <div class="form-text text-danger">
                                     *{{ $message }}
@@ -51,13 +60,12 @@
                         <label for="level" class="col-sm-2 col-form-label">Keterangan</label>
                         <div class="col-sm-4">
                             <div class="input-group">
-                                <input class="form-control @error('keterangan') border-danger @enderror"
-                                    list="datalistOptions" id="keterangan" name="keterangan" value="{{ old('keterangan') }}"
-                                    placeholder="Pilih Keterangan" />
-                                <datalist id="datalistOptions">
-                                    <option value="Lunas"></option>
-                                    <option value="Belum Lunas"></option>
-                                </datalist>
+                                <select class="form-select @error('keterangan') border-danger @enderror" id="keterangan"
+                                    aria-label="Example select with button addon" name="keterangan">
+                                    <option selected>Pilih Keterangan</option>
+                                    <option value="lunas">lunas</option>
+                                    <option value="lunas">belum lunas</option>
+                                </select>
                             </div>
                             @error('keterangan')
                                 <div class="form-text text-danger">
