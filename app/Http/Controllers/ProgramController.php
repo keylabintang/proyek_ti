@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Program;
 use Illuminate\Http\Request;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class ProgramController extends Controller
 {
@@ -12,10 +13,20 @@ class ProgramController extends Controller
      */
     public function index()
     {
-        $judul = "Data Program";
-        $data = Program::orderBy('id_program', 'asc')->get();
-        
-        return view('admin.program.index', compact('judul', 'data'));
+        $program = Program::oldest()->get();
+
+        $title_alert = 'Hapus Data!';
+        $text_alert = "Apakah anda yakin ingin menghapus data ini ??";
+        confirmDelete($title_alert, $text_alert);
+
+        return view(
+            'admin.program.index',
+            [
+                'judul' => 'Daftar Program',
+                'data' => $program,
+
+            ]
+        );
     }
 
     /**
@@ -23,11 +34,12 @@ class ProgramController extends Controller
      */
     public function create()
     {
-        $judul = "Tambah Program";
-
-        $program = Program::all();
-
-        return view('admin.program.create', compact('judul', 'program'));
+        return view(
+            'admin.program.create',
+            [
+                'judul' => 'Tambah Program'
+            ]
+        );
     }
 
     /**
@@ -38,28 +50,29 @@ class ProgramController extends Controller
         $request->validate([
             'nama' => 'required',
             'tanggal' => 'required',
-            'hari' => 'required',
             'waktu' => 'required',
             'tempat' => 'required',
+            'keterangan' => 'required',
         ], [
             'nama.required' => 'Nama Program wajib diisi',
             'tanggal.required' => 'Tanggal wajib diisi',
-            'hari.required' => 'Hari wajib diisi',
             'waktu.required' => 'Waktu wajib diisi',
             'tempat.required' => 'Tempat wajib diisi',
+            'keterangan.required' => 'Keterangan wajib diisi',
         ]);
 
 
         $data = [
             'nama' => $request->input('nama'),
             'tanggal' => $request->input('tanggal'),
-            'hari' => $request->input('hari'),
             'waktu' => $request->input('waktu'),
             'tempat' => $request->input('tempat'),
+            'keterangan' => $request->input('keterangan'),
         ];
 
         Program::create($data);
 
+        Alert::success('Data Program', 'Berhasil ditambahkan!');
         return redirect('/admin/program');
     }
 
@@ -76,9 +89,13 @@ class ProgramController extends Controller
      */
     public function edit(Program $program)
     {
-        $judul = "Edit Program";
-
-        return view('admin/program/edit', compact('program', 'judul'));
+        return view(
+            'admin.program.edit',
+            [
+                'judul' => 'Edit Program',
+                'program' => $program,
+            ]
+        );
     }
 
     /**
@@ -89,28 +106,29 @@ class ProgramController extends Controller
         $request->validate([
             'nama' => 'required',
             'tanggal' => 'required',
-            'hari' => 'required',
             'waktu' => 'required',
             'tempat' => 'required',
+            'keterangan' => 'required',
         ], [
             'nama.required' => 'Nama Program wajib diisi',
             'tanggal.required' => 'Tanggal wajib diisi',
-            'hari.required' => 'Hari wajib diisi',
             'waktu.required' => 'Waktu wajib diisi',
             'tempat.required' => 'Tempat wajib diisi',
+            'keterangan.required' => 'Keterangan wajib diisi',
         ]);
 
 
         $data = [
             'nama' => $request->input('nama'),
             'tanggal' => $request->input('tanggal'),
-            'hari' => $request->input('hari'),
             'waktu' => $request->input('waktu'),
             'tempat' => $request->input('tempat'),
+            'keterangan' => $request->input('keterangan'),
         ];
 
         $program->update($data);
 
+        Alert::success('Data Program', 'Berhasil diubah!');
         return redirect('/admin/program');
     }
 
@@ -120,7 +138,7 @@ class ProgramController extends Controller
     public function destroy(Program $program)
     {
         $program->delete();
-        // Alert::success('Data Member', 'Berhasil dihapus!!');
+        Alert::success('Data Program', 'Berhasil dihapus!!');
         return redirect('/admin/program');
     }
 }

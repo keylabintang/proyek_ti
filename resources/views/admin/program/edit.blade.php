@@ -7,7 +7,7 @@
                 <li class="breadcrumb-item">
                     <span class="text-muted fw-light">Edit</span>
                 </li>
-                <li class="breadcrumb-item active">Jadwal</li>
+                <li class="breadcrumb-item active">Program</li>
             </ol>
         </nav>
         <div class="card mb-4">
@@ -16,7 +16,7 @@
                 {{-- <small class="text-muted">{{ $subJudul }}</small> --}}
             </div>
             <div class="card-body">
-                <form action="{{ route('program.update', $program->id) }}" method="POST">
+                <form action="{{ route('program.update', $program->id_program) }}" method="POST">
                     @csrf
                     @method('PUT')
                     <div class="row mb-3">
@@ -42,29 +42,6 @@
                                     id="tanggal" name="tanggal" value="{{ $program->tanggal }}" />
                             </div>
                             @error('tanggal')
-                                <div class="form-text text-danger">
-                                    *{{ $message }}
-                                </div>
-                            @enderror
-                        </div>
-                    </div>
-                    <div class="row mb-3">
-                        <label for="level" class="col-sm-2 col-form-label">Hari</label>
-                        <div class="col-sm-4">
-                            <div class="input-group">
-                                <input class="form-control @error('hari') border-danger @enderror" list="datalistOptions"
-                                    id="hari" name="hari" value="{{ $program->hari }}" placeholder="Pilih Hari" />
-                                <datalist id="datalistOptions">
-                                    <option value="Senin"></option>
-                                    <option value="Selasa"></option>
-                                    <option value="Rabu"></option>
-                                    <option value="Kamis"></option>
-                                    <option value="Jum'at"></option>
-                                    <option value="Sabtu"></option>
-                                    <option value="Minggu"></option>
-                                </datalist>
-                            </div>
-                            @error('hari')
                                 <div class="form-text text-danger">
                                     *{{ $message }}
                                 </div>
@@ -100,13 +77,27 @@
                             @enderror
                         </div>
                     </div>
+                    <div class="row mb-3">
+                        <label for="keterangan" class="col-sm-2 col-form-label">Keterangan</label>
+                        <div class="col-sm-4">
+                            <div class="input-group">
+                                <textarea class="form-control @error('keterangan') border-danger @enderror"
+                                    id="keterangan" name="keterangan" placeholder="Masukkan keterangan" rows="3">{{ old('keterangan', $program->keterangan) }}</textarea>
+                            </div>
+                            @error('keterangan')
+                                <div class="form-text text-danger">
+                                    *{{ $message }}
+                                </div>
+                            @enderror
+                        </div>
+                    </div>
                     <div class="row justify-content-end mt-4">
                         <div class="col-sm-10">
                             <a href="/admin/program">
                                 <button type="button" class="btn btn-sm btn-secondary px-3">Kembali
                                 </button>
                             </a>
-                            <button type="submit" class="btn btn-sm btn-primary px-3">Edit</button>
+                            <button type="submit" class="btn btn-sm btn-primary px-3">Simpan</button>
                         </div>
                     </div>
                 </form>
