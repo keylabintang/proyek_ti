@@ -16,6 +16,11 @@ class EventController extends Controller
     public function index()
     {
         $event = Event::oldest()->get();
+
+        $title_alert = 'Hapus Data!';
+        $text_alert = "Apakah anda yakin ingin menghapus data ini ??";
+        confirmDelete($title_alert, $text_alert);
+
         return view(
             'admin.event.index',
             [

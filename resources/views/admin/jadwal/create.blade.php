@@ -34,29 +34,6 @@
                         </div>
                     </div>
                     <div class="row mb-3">
-                        <label for="level" class="col-sm-2 col-form-label">Hari</label>
-                        <div class="col-sm-4">
-                            <div class="input-group">
-                                <input class="form-control @error('hari') border-danger @enderror" list="datalistOptions"
-                                    id="hari" name="hari" value="{{ old('hari') }}" placeholder="Pilih Hari" />
-                                <datalist id="datalistOptions">
-                                    <option value="Senin"></option>
-                                    <option value="Selasa"></option>
-                                    <option value="Rabu"></option>
-                                    <option value="Kamis"></option>
-                                    <option value="Jum'at"></option>
-                                    <option value="Sabtu"></option>
-                                    <option value="Minggu"></option>
-                                </datalist>
-                            </div>
-                            @error('hari')
-                                <div class="form-text text-danger">
-                                    *{{ $message }}
-                                </div>
-                            @enderror
-                        </div>
-                    </div>
-                    <div class="row mb-3">
                         <label class="col-sm-2 col-form-label" for="waktu">Waktu</label>
                         <div class="col-sm-4">
                             <div class="input-group">

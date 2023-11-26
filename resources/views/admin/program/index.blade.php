@@ -5,9 +5,9 @@
         <nav aria-label="breadcrumb" class="d-flex justify-content-end">
             <ol class="breadcrumb breadcrumb-style1">
                 <li class="breadcrumb-item">
-                    <span class="text-muted fw-light">{{ $judul }}</span>
+                    <span class="text-muted fw-light">Program</span>
                 </li>
-                <li class="breadcrumb-item active">{{ $judul }}</li>
+                <li class="breadcrumb-item active">Daftar</li>
             </ol>
         </nav>
         <div class="card p-4">
@@ -19,21 +19,24 @@
                         <th>No.</th>
                         <th>Program</th>
                         <th>Tanggal</th>
-                        <th>Hari</th>
                         <th>Waktu</th>
                         <th>Tempat</th>
+                        <th>Keterangan</th>
                         <th>Action</th>
                     </tr>
                 </thead>
                 <tbody>
                     @foreach ($data as $dt)
+                    @php
+                        \Carbon\Carbon::setLocale('id'); 
+                    @endphp
                         <tr>
                             <td>{{ $loop->index + 1 }}. </td>
                             <td>{{ $dt->nama }}</td>
-                            <td>{{ \Carbon\Carbon::parse($dt->tanggal)->format('d-m-Y') }}</td>
-                            <td>{{ $dt->hari }}</td>
+                            <td>{{ \Carbon\Carbon::parse($dt->tanggal)->translatedFormat('l, d F Y') }}</td>
                             <td>{{ \Carbon\Carbon::parse($dt->waktu)->format('h.i') }}</td>
                             <td>{{ $dt->tempat }}</td>
+                            <td>{{ $dt->keterangan }}</td>
                             <td>
                                 <div class="dropdown">
                                     <button type="button" class="btn p-0 dropdown-toggle hide-arrow"
@@ -45,16 +48,10 @@
                                             <i class="bx bx-edit-alt me-1"></i>
                                             Edit
                                         </a>
-
-                                        <form action="{{ route('program.destroy', $dt->id_program) }}" method="POST">
-                                            @csrf
-                                            @method('DELETE')
-                                            <button type="submit" class="dropdown-item"
-                                                onclick="javascript: return confirm('Apakah anda yakin ingin menghapus data ini ?')">
-                                                <i class="bx bx-trash me-1"></i>
-                                                Delete
-                                            </button>
-                                        </form>
+                                        <a class="dropdown-item" href="{{ route('program.destroy', $dt->id_program) }}" data-confirm-delete="true">
+                                            <i class="bx bx-trash me-1"></i>
+                                            Delete
+                                        </a>
                                     </div>
                                 </div>
                             </td>

@@ -19,9 +19,9 @@
                         <th>No</th>
                         <th>Poster</th>
                         <th>Nama</th>
-                        <th>Keterangan</th>
                         <th>Timeline</th>
                         <th>Tempat</th>
+                        <th>Keterangan</th>
                         <th>Action</th>
                     </tr>
                 </thead>
@@ -33,9 +33,9 @@
                               <img src="{{ asset('images/'.$dt->poster) }}" alt="poster event" width="45">
                             </td>
                             <td>{{ $dt->nama }}</td>
-                            <td>{{ $dt->keterangan }}</td>
                             <td>{{ $dt->timeline }}</td>
                             <td>{{ $dt->tempat }}</td>
+                            <td>{{ $dt->keterangan }}</td>
                             <td>
                                 <div class="dropdown">
                                     <button type="button" class="btn p-0 dropdown-toggle hide-arrow"
@@ -47,16 +47,10 @@
                                             <i class="bx bx-edit-alt me-1"></i>
                                             Edit
                                         </a>
-
-                                        <form action="{{ route('event.destroy', $dt->id_event) }}" method="POST">
-                                            @csrf
-                                            @method('DELETE')
-                                            <button type="submit" class="dropdown-item"
-                                                onclick="javascript: return confirm('Apakah anda yakin ingin menghapus data ini ?')">
-                                                <i class="bx bx-trash me-1"></i>
-                                                Delete
-                                            </button>
-                                        </form>
+                                        <a class="dropdown-item" href="{{ route('event.destroy', $dt->id_event) }}" data-confirm-delete="true">
+                                            <i class="bx bx-trash me-1"></i>
+                                            Delete
+                                        </a>
                                     </div>
                                 </div>
                             </td>

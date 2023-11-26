@@ -23,7 +23,7 @@ return new class extends Migration
             $table->string('ig_ortu', 255)->default(null);
             $table->text('alamat');
             $table->string('asal_sekolah', 255)->default(null);
-            $table->string('level', 255)->default('warior');
+            $table->string('level', 255)->default('Warior');
             $table->text('bukti_pembayaran');
             $table->char('status', 1)->default(1);
             $table->timestamps();

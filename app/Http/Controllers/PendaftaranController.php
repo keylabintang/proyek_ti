@@ -16,6 +16,11 @@ class PendaftaranController extends Controller
     public function index()
     {
         $pendaftaran = Pendaftaran::oldest()->get();
+
+        $title_alert = 'Hapus Data!';
+        $text_alert = "Apakah anda yakin ingin menghapus data ini ??";
+        confirmDelete($title_alert, $text_alert);
+
         return view(
             'admin.pendaftaran.index',
             [

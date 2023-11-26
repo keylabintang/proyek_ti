@@ -15,8 +15,7 @@ return new class extends Migration
             $table->increments('id_jadwal');
             $table->date('tanggal');
             $table->time('waktu');
-            $table->string('hari');
-            $table->string('tempat');
+            $table->string('tempat', 199);
             $table->timestamps();
         });
     }

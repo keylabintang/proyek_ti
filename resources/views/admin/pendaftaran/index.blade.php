@@ -76,7 +76,7 @@
                                 <i class="bx bx-dots-vertical-rounded"></i>
                             </button>
                             <div class="dropdown-menu">
-                                <a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#viewdetail-{{ $dt->nama_anak }}">
+                                <a class="dropdown-item" href="javascript:void(0);" data-bs-toggle="modal" data-bs-target="#viewdetail-{{ $dt->nama_anak }}">
                                     <i class="bx bx-error-circle me-1"></i>
                                     View Detail
                                 </a>
@@ -103,23 +103,17 @@
                                 <i class="bx bx-dots-vertical-rounded"></i>
                             </button>
                             <div class="dropdown-menu">
-                                <a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#viewdetail-{{ $dt->nama_anak }}">
+                                <a class="dropdown-item" href="" data-bs-toggle="modal" data-bs-target="#viewdetail-{{ $dt->nama_anak }}">
                                     <i class="bx bx-error-circle me-1"></i>
                                     View Detail
                                 </a>
-                                <form action="{{ route('pendaftaran.destroy', $dt->id_pendaftaran) }}" method="POST">
-                                  @csrf
-                                  @method('DELETE')
-                                  <button type="submit" class="dropdown-item"
-                                      onclick="javascript: return confirm('Apakah anda yakin ingin menghapus data ini ?')">
-                                      <i class="bx bx-trash me-1"></i>
-                                      Delete
-                                  </button>
-                              </form>
+                                <a class="dropdown-item" href="{{ route('pendaftaran.destroy', $dt->id_pendaftaran) }}" data-confirm-delete="true">
+                                    <i class="bx bx-trash me-1"></i>
+                                    Delete
+                                </a>
                             </div>
                           </div>
                           @endif
-                          
                         </td>
                       </tr>
                     @endforeach

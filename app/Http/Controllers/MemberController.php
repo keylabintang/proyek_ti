@@ -3,9 +3,10 @@
 namespace App\Http\Controllers;
 
 use DateTime;
-use Carbon\Carbon;
 use App\Models\Member;
 use Illuminate\Http\Request;
+use RealRashid\SweetAlert\Facades\Alert;
+
 
 class MemberController extends Controller
 {
@@ -14,10 +15,20 @@ class MemberController extends Controller
      */
     public function index()
     {
-        $judul = "Daftar Member";
-        $data = Member::oldest()->get();
+        $member = Member::oldest()->get();
 
-        return view('admin.member.index', compact('judul', 'data'));
+        $title_alert = 'Hapus Data!';
+        $text_alert = "Apakah anda yakin ingin menghapus data ini ??";
+        confirmDelete($title_alert, $text_alert);
+
+        return view(
+            'admin.member.index',
+            [
+                'judul' => 'Daftar Member',
+                'data' => $member,
+
+            ]
+        );
     }
 
     /**
@@ -25,9 +36,12 @@ class MemberController extends Controller
      */
     public function create()
     {
-        $judul = "Tambah Member";
-
-        return view('admin.member.create', compact('judul'));
+        return view(
+            'admin.member.create',
+            [
+                'judul' => 'Tambah Member'
+            ]
+        );
     }
 
     /**
@@ -60,6 +74,7 @@ class MemberController extends Controller
 
         Member::create($data);
 
+        Alert::success('Data Member', 'Berhasil ditambahkan!');
         return redirect('/admin/member');
     }
 
@@ -84,10 +99,14 @@ class MemberController extends Controller
      */
     public function edit(Member $member)
     {
-        $judul = "Ubah Member";
-        $data = $member;
 
-        return view('admin.member.edit', compact('data', 'judul'));
+        return view(
+            'admin.member.edit',
+            [
+                'judul' => 'Tambah Member',
+                'data' => $member
+            ]
+        );
     }
 
     /**
@@ -125,7 +144,7 @@ class MemberController extends Controller
 
         $member->update($data);
 
-        // Alert::success('Data Prodi', 'Berhasil diubah!');
+        Alert::success('Data Member', 'Berhasil diubah!');
         return redirect('/admin/member');
     }
 
@@ -135,7 +154,7 @@ class MemberController extends Controller
     public function destroy(Member $member)
     {
         $member->delete();
-        // Alert::success('Data Member', 'Berhasil dihapus!!');
+        Alert::success('Data Member', 'Berhasil dihapus!!');
         return redirect('/admin/member');
     }
 }
