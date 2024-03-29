@@ -18,6 +18,7 @@ return new class extends Migration
             $table->string('paragraf', 199);
             $table->string('tombol', 50);
             $table->string('link', 199);
+            $table->text('banner');
             $table->timestamps();
         });
     }
